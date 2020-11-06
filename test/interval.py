@@ -1,4 +1,4 @@
-from subtract import RangeSet, setSubtract
+from test.subtract import setSubtract
 basetimeline = [(1,25)]
 w1 = [(1,3),(5,9),(15, 17)]
 w2 = [(2,4),(7,9),(13, 16),(17,19)]
