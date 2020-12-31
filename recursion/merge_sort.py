@@ -1,5 +1,4 @@
 def mergeSort(arr):
-    import math
     if (len(arr) < 2):
         return arr
     middle = ((len(arr) + 1) // 2)

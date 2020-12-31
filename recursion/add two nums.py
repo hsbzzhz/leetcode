@@ -4,6 +4,11 @@
 原因：342 + 465 = 807
 """
 
+
+class ListNode(object):
+    pass
+
+
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         def dfs(l, r, i):
