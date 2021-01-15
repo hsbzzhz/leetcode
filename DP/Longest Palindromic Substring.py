@@ -6,18 +6,17 @@ class Solution(object):
         :rtype: str
         """
         size = len(s)
-        if size<2:
+        if size < 2:
             return s
-        max_sub = ''
+        max_sub = ""
         for i in range(size):
             # 存在奇偶情况，都需要算出来再进行长度比较
-            odd, odd_len = self.__center_spread(s,i,i)
-            even, even_len = self.__center_spread(s,i,i+1)
+            odd, odd_len = self.__center_spread(s, i, i)
+            even, even_len = self.__center_spread(s, i, i + 1)
 
             temp_max_sub = odd if odd_len > even_len else even
             max_sub = temp_max_sub if len(temp_max_sub) > len(max_sub) else max_sub
         return max_sub
-
 
     def __center_spread(self, s, left, right):
         """
@@ -31,7 +30,8 @@ class Solution(object):
         while left >= 0 and right < len(s) and s[left] == s[right]:
             left -= 1
             right += 1
-        return s[left+1:right], right-left-1
+        return s[left + 1 : right], right - left - 1
+
 
 o = Solution()
 ans = o.longestPalindrome("babad")

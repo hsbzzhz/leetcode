@@ -11,18 +11,23 @@ M 是对应三个字母的数字个数，N 是对应四个字母的数字个数
 ！！！看不懂
 循环每个数字对应的list，+递归
 """
+
+
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        if not digits: return []
+        if not digits:
+            return []
 
-        phone = {'2': ['a', 'b', 'c'],
-                 '3': ['d', 'e', 'f'],
-                 '4': ['g', 'h', 'i'],
-                 '5': ['j', 'k', 'l'],
-                 '6': ['m', 'n', 'o'],
-                 '7': ['p', 'q', 'r', 's'],
-                 '8': ['t', 'u', 'v'],
-                 '9': ['w', 'x', 'y', 'z']}
+        phone = {
+            "2": ["a", "b", "c"],
+            "3": ["d", "e", "f"],
+            "4": ["g", "h", "i"],
+            "5": ["j", "k", "l"],
+            "6": ["m", "n", "o"],
+            "7": ["p", "q", "r", "s"],
+            "8": ["t", "u", "v"],
+            "9": ["w", "x", "y", "z"],
+        }
 
         def backtrack(conbination, nextdigit):
             if len(nextdigit) == 0:
@@ -32,5 +37,5 @@ class Solution:
                     backtrack(conbination + letter, nextdigit[1:])
 
         res = []
-        backtrack('', digits)
+        backtrack("", digits)
         return res
