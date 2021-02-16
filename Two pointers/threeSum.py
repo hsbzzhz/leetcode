@@ -23,9 +23,11 @@ class Solution(object):
         """
         nums.sort()
         res = []
-        for i in range(len(nums)-2):
-            if nums[i] > 0: break   # 特殊情况，最小的数字都大于0
-            if i > 0 and nums[i] == nums[i-1]: continue  # 保证第第一个数 index i 不会重复
+        for i in range(len(nums) - 2):
+            if nums[i] > 0:
+                break  # 特殊情况，最小的数字都大于0
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue  # 保证第第一个数 index i 不会重复
             l, r = i + 1, len(nums) - 1
             while l < r:
                 if nums[i] + nums[l] + nums[r] == 0:
@@ -33,8 +35,10 @@ class Solution(object):
                     l += 1
                     r -= 1
                     # 判断左界和右界是否和下一位置重复，去除重复解。并同时将 L,RL,R 移到下一位置，寻找新的解
-                    while r > l and nums[r] == nums[r + 1]: r -= 1
-                    while r > l and nums[l] == nums[l - 1]: l += 1
+                    while r > l and nums[r] == nums[r + 1]:
+                        r -= 1
+                    while r > l and nums[l] == nums[l - 1]:
+                        l += 1
 
                 elif nums[i] + nums[l] + nums[r] > 0:
                     r -= 1

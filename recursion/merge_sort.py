@@ -1,9 +1,10 @@
 def mergeSort(arr):
-    if (len(arr) < 2):
+    if len(arr) < 2:
         return arr
     middle = len(arr) // 2
     left, right = arr[:middle], arr[middle:]
     return merge(mergeSort(left), mergeSort(right))
+
 
 # merge 是治， mergeSort是分
 def merge(left, right):
