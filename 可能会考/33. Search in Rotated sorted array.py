@@ -20,24 +20,47 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        if not nums:
-            return -1
+        if not nums: return -1
         l, r = 0, len(nums) - 1
         while l <= r:
             mid = (l + r) // 2
-            if nums[mid] == target:
-                return mid
-            if nums[0] <= nums[mid]:
-                if nums[0] <= target < nums[mid]:
+            if nums[mid] == target: return mid
+            if nums[mid] >= nums[l]:
+                # 如果落在大的数组区间
+                if nums[l] <= target < nums[mid]:
                     r = mid - 1
                 else:
                     l = mid + 1
             else:
-                if nums[mid] < target <= nums[len(nums) - 1]:
+                # 如果落在小的数组区间
+                if nums[mid] < target <= nums[r]:
                     l = mid + 1
                 else:
                     r = mid - 1
         return -1
+
+    """
+    https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/
+    衍生题：剑指 Offer 11. 旋转数组的最小数字
+    求最小的数
+    """
+    def minArray(self, numbers):
+        """
+        :type numbers: List[int]
+        :rtype: int
+        """
+        l, r = 0, len(numbers) - 1
+        while l < r:
+            mid = (l + r) // 2
+            if numbers[mid] > numbers[r]:
+                l = mid + 1
+            elif numbers[mid] < numbers[r]:
+                r = mid
+            else:
+                r -= 1
+        return numbers[l]
+
+
 
 
 test_case = [4, 5, 6, 7, 0, 1, 2]
