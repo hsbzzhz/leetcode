@@ -19,7 +19,8 @@
 
 def maxProfit(self, prices):
     """
-    方法一： 双指针
+    方法一：
+
     :type prices: List[int]
     :rtype: int
     """
