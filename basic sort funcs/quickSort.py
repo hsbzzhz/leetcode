@@ -1,6 +1,7 @@
 class SortDemo(object):
     """
     O(nlogn)
+    最坏情况O(n^2)
     """
     def quickSort(self, nums: []):
         if len(nums) < 2:

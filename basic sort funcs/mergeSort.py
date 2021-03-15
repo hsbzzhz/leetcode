@@ -1,6 +1,7 @@
 class SortDemo(object):
     """
     O(nlogn)
+    最坏情况也能保证 O(nlogn)
     """
 
     def mergeSort(self, nums: [int], l, r):
