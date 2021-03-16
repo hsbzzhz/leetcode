@@ -7,6 +7,48 @@ class TreeNode:
         self.left = left
         self.right = right
 
+    """
+    三种遍历方法
+    """
+    def preoder(self, TreeNode):
+        # 前序遍历: 根 - 左 - 右
+        if TreeNode is None:
+            return ' '
+        print(TreeNode.val)    # 中
+        if TreeNode.left:
+            self.preoder(TreeNode.left)
+        if TreeNode.right:
+            self.preoder(TreeNode.right)
+
+    def inorder(self, TreeNode):
+        # 中序遍历：左 - 根 - 右
+        if TreeNode is None:
+            return ' '
+        if TreeNode.left:
+            self.preoder(TreeNode.left)
+        print(TreeNode.val)
+        if TreeNode.right:
+            self.preoder(TreeNode.right)
+
+    def postorder(self, TreeNode):
+        # 后序遍历： 左 - 右 - 根
+        if TreeNode is None:
+            return ' '
+        if TreeNode.left:
+            self.preoder(TreeNode.left)
+
+        if TreeNode.right:
+            self.preoder(TreeNode.right)
+
+        print(TreeNode.val)
+
+    def graorder(self, TreeNode):
+        """
+        BFS 广度优先遍历
+        :param root:
+        :return:
+        """
+        pass
 
 class FindDepth():
     """
