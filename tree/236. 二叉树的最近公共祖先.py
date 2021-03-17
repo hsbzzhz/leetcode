@@ -25,6 +25,7 @@ class Solution:
         left =self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
+        # 如果存在一个，则返回存在的一个
         if left == None:
             return right
         if right == None:
@@ -32,4 +33,5 @@ class Solution:
         if left and right:
             # 如果 p 和 q 都存在，则返回它们的公共祖先；
             return root
+        # 如果p q都不存在，则返回null
         return None

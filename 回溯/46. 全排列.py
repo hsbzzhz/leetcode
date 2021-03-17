@@ -1,20 +1,29 @@
+
 class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        self.res = []
+    def permute(self, nums):
+        """
+        回溯
+        时间复杂度：O(n×n!)，其中 n 为序列的长度
+        :param nums:
+        :return:
+        """
+        def backtrack(nums: [], p: int, q: int):
+            if p == q:
+                # 递归结束条件，走到最后一个数了
+                res.append(nums)
+            else:
+                for i in range(p, q):
+                    # 先把i位置的数调换到第一位上来，然后对后面数进行递归操作
+                    nums[p], nums[i] = nums[i], nums[p]
+                    backtrack(nums, p+1, q)
+                    # 为了下一步能够顺利进行，还要把第一个数换回去
+                    nums[p], nums[i] = nums[i], nums[p]
 
-        def backtrack(nums, track):
-            if len(track) == len(nums):
-                self.res.append(track)
+        res = []
+        backtrack(nums, 0, len(nums))
+        return res
 
-            # 模板开始
-            for each in nums:
-                if each in track:
-                    continue
-                # step1.
-                track.append(each)
-                backtrack(nums, track)
-                # step2.
-                track.pop(-1)
-        track = []
-        backtrack(nums, track)
-        return self.res
+
+demo = Solution()
+nums = [1, 2, 3]
+print(demo.permute(nums))
