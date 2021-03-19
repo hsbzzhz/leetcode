@@ -36,15 +36,26 @@ class Solution:
     滑动窗口
     """
     def lengthOfLongestSubstring(self, s: str) -> int:
+        """
+        时间复杂度：O(n)
+        空间~~~： O(n)有个dict
+        :param s:
+        :return:
+        """
         if len(s) < 1:
             return 0
         i = j = 0
+        visited = {}
         count = 0
         while j < len(s):
-            if i != j and s[i] == s[j]:
-                count = max((j - i), count)
-                i = j
-            j+=1
+            if i != j and s[j] in visited:
+                # abba 这种情况，确保不能往后退
+                i = max(visited[s[j]] + 1, i)
+
+                # visited.update({s[j]: j})
+            count = max(j - i + 1, count)
+            visited.update({s[j]: j})  # 更新最新元素的位置
+            j += 1
 
         return count
 
