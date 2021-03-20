@@ -23,8 +23,8 @@ def heapify(tree: [], n: int, i: int):
     # 跳出递归条件
     # if i >= n:
     #     return
-    c1 = 2*i + 1
-    c2 = 2*i + 2
+    c1 = 2 * i + 1
+    c2 = 2 * i + 2
     # 确保子结点不出界
     max_index = i
     if c1 < n and tree[c1] > tree[max_index]:
@@ -37,7 +37,7 @@ def heapify(tree: [], n: int, i: int):
         heapify(tree, n, max_index)
 
 
-def build_heap(tree:[], n: int):
+def build_heap(tree: [], n: int):
     """
     时间复杂度O(nlgn)
     从最后一个结点的父结点依次向上调用堆化，即可完成
@@ -45,8 +45,8 @@ def build_heap(tree:[], n: int):
     :param n: 总共结点个数
     :return:
     """
-    last_node = n -1
-    last_parent = (last_node - 1) //2
+    last_node = n - 1
+    last_parent = (last_node - 1) // 2
     while last_parent >= 0:
         # 对遍历过程的每一个非叶子结点，将以其为根的子树维护成大顶堆
         # 最终整个树都满足大顶堆的性质
@@ -57,16 +57,13 @@ def build_heap(tree:[], n: int):
 def heap_sort(tree: [], n):
     # O(nlgn)
     build_heap(tree, n)
-    i = n -1
+    i = n - 1
     while i >= 0:
         # 将遍历到的元素与最后一个堆的元素交换,
         tree[i], tree[0] = tree[0], tree[i]
         # 还剩i个枝
         heapify(tree, i, 0)
         i -= 1
-
-
-
 
 
 tree = [4, 17, 5, 1, 2, 3, 7]

@@ -24,7 +24,8 @@ def maxProfit(self, prices):
     :type prices: List[int]
     :rtype: int
     """
-    if not prices: return 0
+    if not prices:
+        return 0
     minPrice, maxPrice = prices[0], 0
     for index in range(len(prices)):
         minPrice = min(minPrice, prices[index])

@@ -10,8 +10,11 @@
 向右旋转 4 步: 2->0->1->NULL
 
 """
+
+
 def rotateRight(self, head: ListNode, k: int) -> ListNode:
-    if not head or k == 0: return head
+    if not head or k == 0:
+        return head
     tail, length = head, 1
     while tail.next:
         tail, length = tail.next, length + 1

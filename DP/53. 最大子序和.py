@@ -18,6 +18,7 @@ class Solution:
 
     O(n)
     """
+
     def maxSubArray(self, nums: List[int]) -> int:
         max_res = nums[0]
         pre = 0

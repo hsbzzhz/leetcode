@@ -2,11 +2,12 @@ class SortDemo(object):
     """
     O(n^2)
     """
+
     def selectSort(self, nums: list):
         for i in range(len(nums) - 1):
             # 将起始元素设为最小元素
             min_index = i
-            for j in range(i+1, len(nums)):
+            for j in range(i + 1, len(nums)):
                 if nums[j] < nums[min_index]:
                     min_index = j
             # 最小元素塞到起始位置

@@ -5,6 +5,7 @@
 #         self.left = None
 #         self.right = None
 
+
 class Solution:
     """
     O(n) 递归
@@ -16,13 +17,16 @@ class Solution:
 （6） 如果 left 和 right 都为空，则返回空（其实已经包含在前面的情况中了）
 
     """
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+
+    def lowestCommonAncestor(
+        self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
+    ) -> "TreeNode":
         if root is None:
             return None
-        if root == p or root ==q:
+        if root == p or root == q:
             return root
 
-        left =self.lowestCommonAncestor(root.left, p, q)
+        left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
 
         # 如果存在一个，则返回存在的一个

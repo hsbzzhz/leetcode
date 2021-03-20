@@ -22,12 +22,14 @@
 
 """
 
+
 def removeDuplicates(self, nums):
     """
     :type nums: List[int]
     :rtype: int
     """
-    if not nums: return 0
+    if not nums:
+        return 0
     slow = 0
     for fast in range(len(nums)):
         # 前后相同，就继续遍历直到快慢指针指向不同的数

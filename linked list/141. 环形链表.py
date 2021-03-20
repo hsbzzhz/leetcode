@@ -10,6 +10,7 @@ class Solution:
 链接：https://leetcode-cn.com/problems/linked-list-cycle
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def hasCycle(self, head: ListNode) -> bool:
         """
         时间复杂度：O(N)，其中 N 是链表中的节点数。最坏情况下我们需要遍历每个节点一次。
@@ -24,7 +25,6 @@ class Solution:
             seen.add(head)
             head = head.next
         return False
-
 
     def hasCycle2(self, head: ListNode) -> bool:
         """

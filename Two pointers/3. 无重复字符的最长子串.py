@@ -35,6 +35,7 @@ class Solution:
     """
     滑动窗口
     """
+
     def lengthOfLongestSubstring(self, s: str) -> int:
         """
         时间复杂度：O(n)
@@ -59,24 +60,25 @@ class Solution:
 
         return count
 
+
 target = "pwwkew"
 s = Solution()
 res = s.lengthOfLongestSubstring(target)
 print(res)
 
-    # def lengthOfLongestSubstring2(self, s):
-    #     """
-    #     :type s: str
-    #     :rtype: int
-    #     """
-    #     temp = ''
-    #     length = 0
-    #     for i in s:
-    #         if i not in temp:
-    #             temp += i
-    #             length = max(length, len(temp))
-    #         else:
-    #             temp = temp[temp.index(i) + 1:] + i
-    #             # temp += i
-    #             # temp = temp[temp.index(i) + 1:]
-    #     return length
+# def lengthOfLongestSubstring2(self, s):
+#     """
+#     :type s: str
+#     :rtype: int
+#     """
+#     temp = ''
+#     length = 0
+#     for i in s:
+#         if i not in temp:
+#             temp += i
+#             length = max(length, len(temp))
+#         else:
+#             temp = temp[temp.index(i) + 1:] + i
+#             # temp += i
+#             # temp = temp[temp.index(i) + 1:]
+#     return length

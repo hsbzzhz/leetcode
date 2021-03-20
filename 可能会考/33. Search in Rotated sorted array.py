@@ -20,11 +20,13 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        if not nums: return -1
+        if not nums:
+            return -1
         l, r = 0, len(nums) - 1
         while l <= r:
             mid = (l + r) // 2
-            if nums[mid] == target: return mid
+            if nums[mid] == target:
+                return mid
             if nums[mid] >= nums[l]:
                 # 如果落在大的数组区间
                 if nums[l] <= target < nums[mid]:
@@ -44,6 +46,7 @@ class Solution(object):
     衍生题：剑指 Offer 11. 旋转数组的最小数字
     求最小的数
     """
+
     def minArray(self, numbers):
         """
         :type numbers: List[int]
@@ -59,8 +62,6 @@ class Solution(object):
             else:
                 r -= 1
         return numbers[l]
-
-
 
 
 test_case = [4, 5, 6, 7, 0, 1, 2]

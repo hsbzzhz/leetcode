@@ -11,6 +11,7 @@
 输出：true
 """
 
+
 class Solution:
     """
     思路：
@@ -18,14 +19,12 @@ class Solution:
     2。如果是右括号，pop出栈顶左括号（所以只入栈了一半的字符串）
     3。最后如果为空栈，即匹配成功
     """
-    def isValid(self, s: str) -> bool:
-        if len(s) % 2 != 0: return False
 
-        pairs = {
-            ')': '(',
-            ']': '[',
-            '}': '{'
-        }
+    def isValid(self, s: str) -> bool:
+        if len(s) % 2 != 0:
+            return False
+
+        pairs = {")": "(", "]": "[", "}": "{"}
         stack = list()
         for each in s:
             if each in pairs:

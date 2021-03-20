@@ -10,11 +10,12 @@ class TreeNode:
     """
     三种遍历方法
     """
+
     def preoder(self, TreeNode):
         # 前序遍历: 根 - 左 - 右
         if TreeNode is None:
-            return ' '
-        print(TreeNode.val)    # 中
+            return " "
+        print(TreeNode.val)  # 中
         if TreeNode.left:
             self.preoder(TreeNode.left)
         if TreeNode.right:
@@ -23,7 +24,7 @@ class TreeNode:
     def inorder(self, TreeNode):
         # 中序遍历：左 - 根 - 右
         if TreeNode is None:
-            return ' '
+            return " "
         if TreeNode.left:
             self.preoder(TreeNode.left)
         print(TreeNode.val)
@@ -33,7 +34,7 @@ class TreeNode:
     def postorder(self, TreeNode):
         # 后序遍历： 左 - 右 - 根
         if TreeNode is None:
-            return ' '
+            return " "
         if TreeNode.left:
             self.preoder(TreeNode.left)
 
@@ -50,10 +51,12 @@ class TreeNode:
         """
         pass
 
-class FindDepth():
+
+class FindDepth:
     """
     104. 二叉树最大深度
     """
+
     def maxDepth(self, root: TreeNode) -> int:
         """
         DFS  O(n)
@@ -62,7 +65,8 @@ class FindDepth():
         :param root:
         :return:
         """
-        if not root: return 0
+        if not root:
+            return 0
         return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 
@@ -99,7 +103,8 @@ class FindDif:
     """
 
     def isSymmetric(self, root: TreeNode) -> bool:
-        if not root: return True
+        if not root:
+            return True
         return self.dfs(root.left, root.right)
 
     def dfs(self, left: TreeNode, right: TreeNode):
@@ -112,9 +117,12 @@ class FindDif:
         :param right:
         :return:
         """
-        if left is None and right is None: return True
-        if left is None or right is None: return False
-        if left.val != right.val: return False
+        if left is None and right is None:
+            return True
+        if left is None or right is None:
+            return False
+        if left.val != right.val:
+            return False
         return self.dfs(left.left, right.right) and self.dfs(left.right, right.left)
 
 
@@ -130,6 +138,7 @@ class TreeTransfer:
     链接：https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         def helper(nums, left, right):
             if left >= right:

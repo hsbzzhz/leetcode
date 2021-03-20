@@ -15,13 +15,15 @@ n  :   0 1 2 3 4 5 ...
 res:   1 1 2 3 5 8 ...
 
 """
+
+
 def climbStairs(n):
     """
     :type n: int
     :rtype: int
     """
     dp = [1, 1]
-    for i in range(2, n+1):
+    for i in range(2, n + 1):
         dp.append(dp[i - 1] + dp[i - 2])
     return dp[n]
 
@@ -31,15 +33,18 @@ class Solution(object):
     def climbStairs2(self, n):
         if n == 0 or n == 1:
             return 1
-        return self.climbStairs2(n-1) + self.climbStairs2(n-2)
+        return self.climbStairs2(n - 1) + self.climbStairs2(n - 2)
+
 
 """
 fib 参考
 """
+
+
 def fib(n):
-    if n ==1:
+    if n == 1:
         return [1]
-    elif n ==2:
+    elif n == 2:
         return [1, 1]
     fibs = [1, 1]
     for i in range(2, n):

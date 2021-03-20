@@ -11,6 +11,7 @@ class Solution:
     链接：https://leetcode-cn.com/problems/unique-paths
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def uniquePaths(self, m: int, n: int) -> int:
         """
         dp: O(mn)
@@ -18,10 +19,10 @@ class Solution:
         :param n:
         :return:
         """
-        dp = [[1]*n for _ in range(m)]
+        dp = [[1] * n for _ in range(m)]
         for i in range(1, m):
             for j in range(1, n):
-                dp[i][j] = dp[i-1][j] + dp[i][j-1]
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
         return dp[-1][-1]
 
     """

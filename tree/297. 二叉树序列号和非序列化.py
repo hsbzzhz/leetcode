@@ -13,6 +13,7 @@ postOrder：左 右 中
 #         self.left = None
 #         self.right = None
 
+
 class Codec:
     """
     O(n) 依据前序遍历的复杂度
@@ -27,14 +28,14 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        self.res = ''
+        self.res = ""
 
         def preodertravel(root: TreeNode) -> None:
             if root == None:
-                self.res += 'None,'
+                self.res += "None,"
             else:
                 self.res += str(root.val)
-                self.res += ','
+                self.res += ","
                 preodertravel(root.left)
                 preodertravel(root.right)
 
@@ -43,7 +44,7 @@ class Codec:
 
     def preorderbuild(self, data: []):
         temp_str = data.pop(0)
-        if temp_str == 'None':
+        if temp_str == "None":
             return None
         else:
             root = TreeNode(int(temp_str))
@@ -57,7 +58,7 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        data = data.split(',')
+        data = data.split(",")
         if len(data) <= 1:
             return None
 

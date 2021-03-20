@@ -14,7 +14,7 @@ def backtrack(路径, 选择列表):
 """
 
 
-def is_valid(board:[], row, col):
+def is_valid(board: [], row, col):
     for i in range(row):
         """
         不能同列，和同对角线
@@ -35,19 +35,22 @@ class Solution:
     def is_valid(self, board, row, col) -> bool:
         # 仅用看列
         for r in range(row):  # r:0->row-1
-            if board[r][col] == 'Q': return False
+            if board[r][col] == "Q":
+                return False
         # 判断(左上角)主对角线：判断[0:row-1,0:col-1]是否有'Q'
         mrow, mcol = row, col
         while mrow > 0 and mcol > 0:  # mrow:0->row-1,mcol:0->row-1
             mrow -= 1
             mcol -= 1
-            if board[mrow][mcol] == 'Q': return False
+            if board[mrow][mcol] == "Q":
+                return False
         # 判断(右上角)副对角线：判断[0:row-1,col+1:n]
         vrow, vcol = row, col
         while vrow > 0 and vcol < len(board) - 1:  # vrow:0->row-1,vcol:col+1->n
             vrow -= 1
             vcol += 1
-            if board[vrow][vcol] == 'Q': return False
+            if board[vrow][vcol] == "Q":
+                return False
         return True
 
     def solveNQueens(self, n: int) -> List[List[str]]:
@@ -57,7 +60,7 @@ class Solution:
             if row == n:
                 temp = []
                 for line in board:
-                    t = ''.join(line)
+                    t = "".join(line)
                     temp.append(t)
                 self.res.append(temp)
                 return
@@ -65,14 +68,15 @@ class Solution:
                 for col in range(len(board)):
                     if not self.is_valid(board, row, col):
                         continue
-                    board[row][col] = 'Q'
+                    board[row][col] = "Q"
                     backtrack(board, row + 1)
-                    board[row][col] = '.'
+                    board[row][col] = "."
 
         checkboard = [["." for _ in range(n)] for _ in range(n)]
 
         backtrack(checkboard, 0)
         return self.res
+
 
 demo = Solution()
 res = demo.solveNQueens(4)

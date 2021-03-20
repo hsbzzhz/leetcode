@@ -44,6 +44,7 @@ print(res)
 
 #########################################################################################
 
+
 class SortDemo2(object):
     """
     O(nlogn)
@@ -71,14 +72,14 @@ class SortDemo2(object):
                     p2 += 1
             # 深度拷贝
             for i in range(len(res)):
-                nums[l+i] = res[i]
+                nums[l + i] = res[i]
 
         if l == r:
             return None
         mid = (l + r) // 2
         # 分开
         self.mergeSort(nums, l, mid)
-        self.mergeSort(nums, mid+1, r)
+        self.mergeSort(nums, mid + 1, r)
         # 合并
         _merge(nums, l, mid, r)
 
