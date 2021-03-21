@@ -10,7 +10,8 @@ class Solution:
         def backtrack(nums: [], p: int, q: int):
             if p == q:
                 # 递归结束条件，走到最后一个数了
-                res.append(nums)
+                # 这里要进行深拷贝
+                res.append(nums[:])
             else:
                 for i in range(p, q):
                     # 先把i位置的数调换到第一位上来，然后对后面数进行递归操作

@@ -36,9 +36,3 @@ class Solution:
         return count
 
 
-"""
-https://blog.csdn.net/wuthering_wind/article/details/80271972
-
-一辆汽车，从0要开到n，路线上分布着k个加油站（0号点必有）每个加油站可以加ai油，
-（1油可以跑1km），假设油箱初始为0，无装油上限,若可以跑nkm求最少加油次数，不能就输出−1。
-"""
