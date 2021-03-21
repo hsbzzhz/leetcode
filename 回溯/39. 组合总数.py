@@ -33,9 +33,9 @@ candidates 中的数字可以无限制重复被选取。
 
 class Solution:
     def combinationSum(self, candidates: [int], target: int) -> [[int]]:
-        res = []
+        res = list()
         candidates.sort()
-        def backtrace(candidates:[], start: int, target: int):
+        def backtrace(candidates:[] ,path: [int], start: int, target: int):
             """
 
             :param candidates:
@@ -44,21 +44,21 @@ class Solution:
             :return:
             """
             # 跳出递归
-            path = []
             if target == 0:
-                res.append(path)
+                res.append(path[:])
                 return
-
-            for i in range(len(candidates)):
+            # 如果是range(len(candidates)), 就会出现重复解,加上start 就不会
+            for i in range(start, len(candidates)):
                 if candidates[i] <= target:
                     path.append(candidates[i])
-                    backtrace(candidates, i, target - candidates[i])
+                    backtrace(candidates, path, i, target - candidates[i])
                     path.pop(-1)
-        backtrace(candidates, 0, target)
+        backtrace(candidates, [], 0, target)
         return res
 
 s = Solution()
 nums = [2, 3, 6, 7]
 target = 7
 res = s.combinationSum(nums, target)
+
 print(res)
