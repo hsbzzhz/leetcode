@@ -15,7 +15,7 @@ class TreeNode:
         # 前序遍历: 根 - 左 - 右
         if TreeNode is None:
             return " "
-        print(TreeNode.val)  # 中
+        print(TreeNode.val)
         if TreeNode.left:
             self.preoder(TreeNode.left)
         if TreeNode.right:
@@ -137,19 +137,30 @@ class TreeTransfer:
     来源：力扣（LeetCode）
     链接：https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+    bst: 左 < 中 < 右
     """
 
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
-        def helper(nums, left, right):
-            if left >= right:
-                return None
-            mid = (left + right) // 2
-            this_node = TreeNode(nums[mid])
-            this_node.left = helper(nums, left, mid)
-            this_node.right = helper(nums, mid + 1, right)
-            return this_node
+        """
+        因题目要求构造一棵「高度平衡」的树，所以我们在选取节点时选择数组的中点作为根节点，以此来保证平衡性。
+        中序遍历
+        时间复杂度：O(n)
+        空间复杂度：O(log(n))
+        :param nums:
+        :return:
+        """
+        if not nums:
+            return None
+        # 找到中点作为根节点
+        mid_idx = len(nums)//2
+        node = TreeNode(nums[mid_idx])
 
-        return helper(nums, 0, len(nums))
+        # 递归构建左右子树
+        node.left = self.sortedArrayToBST(nums[:mid_idx])
+        node.right = self.sortedArrayToBST(nums[mid_idx+1:])
+
+        return node
 
 
 class Reserve(object):
@@ -188,6 +199,8 @@ class Reserve(object):
         temp = root.left
         root.left = root.right
         root.right = temp
+
+        # root.left, root.right = root.right, root.left
 
         # 递归翻转左右子树
         self.invertTree(root.left)
