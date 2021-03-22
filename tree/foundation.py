@@ -150,3 +150,46 @@ class TreeTransfer:
             return this_node
 
         return helper(nums, 0, len(nums))
+
+
+class Reserve(object):
+    """
+    226. 翻转二叉树
+    示例：
+
+    输入：
+
+         4
+       /   \
+      2     7
+     / \   / \
+    1   3 6   9
+    输出：
+
+         4
+       /   \
+      7     2
+     / \   / \
+    9   6 3   1
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/invert-binary-tree
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+    """
+    def invertTree(self, root):
+        """
+        使用前序遍历
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        if root is None: return None
+        if (root.left is None) and (root.right is None): return root
+
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+
+        # 递归翻转左右子树
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
