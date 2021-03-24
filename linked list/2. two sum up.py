@@ -20,7 +20,7 @@ def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         if not l and not r and not i:
             return None
         s = (l.val if l else 0) + (r.val if r else 0) + i
-        node = ListNode(s % 10)  # 当前位的值
+        node = ListNode(s % 10)  # 取余，当前位的值
         node.next = dfs(l.next if l else None, r.next if r else None, s // 10)
         return node
 

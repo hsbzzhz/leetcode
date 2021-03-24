@@ -57,6 +57,11 @@ class Codec:
         return self.res
 
     def preorderbuild(self, data: []):
+        """
+        build a tree with given list
+        :param data:
+        :return:
+        """
         temp_str = data.pop(0)
         if temp_str == "None":
             return None

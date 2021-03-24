@@ -25,6 +25,7 @@
 
 def removeDuplicates(self, nums):
     """
+    # 把重复后面的元素向前挪
     :type nums: List[int]
     :rtype: int
     """

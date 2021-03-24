@@ -26,6 +26,9 @@ class Solution:
             head = head.next
         return False
 
+    """
+    方法二：
+    """
     def hasCycle2(self, head: ListNode) -> bool:
         """
         快慢指针
@@ -38,9 +41,10 @@ class Solution:
             return False
         slow = head
         fast = head.next
-
+        # 快慢两个指针同时向前，必须步调不一致才会相遇
         while slow != fast:
             if not fast or not fast.next:
+                # 跳出循环
                 return False
             slow = slow.next
             fast = fast.next.next
