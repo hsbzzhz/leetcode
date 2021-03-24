@@ -25,7 +25,8 @@
 
 def removeDuplicates(self, nums):
     """
-    # 把重复后面的元素向前挪
+    把重复后面的元素向前挪
+    慢指针就记录真实数组
     :type nums: List[int]
     :rtype: int
     """
