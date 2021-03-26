@@ -19,7 +19,7 @@
 
 def maxProfit(self, prices):
     """
-    方法一：
+    单次买卖，获得的最大利润
 
     :type prices: List[int]
     :rtype: int
@@ -31,3 +31,18 @@ def maxProfit(self, prices):
         minPrice = min(minPrice, prices[index])
         maxPrice = max(maxPrice, prices[index] - minPrice)
     return maxPrice
+
+
+def maxProfit2(self, prices: List[int]) -> int:
+    """
+    122. 买卖股票的最佳时机 II
+    允许多次买卖
+    :param self:
+    :param prices:
+    :return:
+    """
+    max_profit = 0
+    for i in range(1, len(prices)):
+        max_profit += max(0, prices[i] - prices[i - 1])
+
+    return max_profit
