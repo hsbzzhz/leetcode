@@ -15,6 +15,7 @@
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock
 """
+from typing import List
 
 
 def maxProfit(self, prices):
@@ -35,8 +36,10 @@ def maxProfit(self, prices):
 
 def maxProfit2(self, prices: List[int]) -> int:
     """
+    O(n) O(1)
     122. 买卖股票的最佳时机 II
     允许多次买卖
+    如果有把卖出价格，那此方法不可行
     :param self:
     :param prices:
     :return:
@@ -46,3 +49,18 @@ def maxProfit2(self, prices: List[int]) -> int:
         max_profit += max(0, prices[i] - prices[i - 1])
 
     return max_profit
+
+def maxProfit_dp(self, prices: List[int]) -> int:
+    """
+    O(n) O(n)
+    :param self:
+    :param prices:
+    :return:
+    """
+    dp = [[0 for _ in range(2)] for _ in range(len(prices))]
+    # [["." for _ in range(n)] for _ in range(n)]
+    dp[0][1] = - prices[0]
+    for i in range(1, len(prices)):
+        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])
+    return dp[len(prices) - 1][0]

@@ -23,6 +23,7 @@ https://leetcode-cn.com/problems/climbing-stairs/
 
 def climbStairs(n):
     """
+    动态规划
     :type n: int
     :rtype: int
     """
