@@ -43,7 +43,9 @@ class Solution(object):
 
     """
     https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/
+    https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/
     衍生题：剑指 Offer 11. 旋转数组的最小数字
+    153, 寻找旋转排序数组中的最小值
     求最小的数
     """
 

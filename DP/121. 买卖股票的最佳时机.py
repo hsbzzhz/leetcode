@@ -50,6 +50,7 @@ def maxProfit2(self, prices: List[int]) -> int:
 
     return max_profit
 
+
 def maxProfit_dp(self, prices: List[int]) -> int:
     """
     O(n) O(n)

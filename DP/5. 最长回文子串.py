@@ -79,14 +79,15 @@ def longestPalindrome(self, s: str) -> str:
     if size < 2:
         return s
 
-    dp = [[False for _ in range(size)] for _ in range(size)]
+    # dp = [[False for _ in range(size)] for _ in range(size)]
+    dp = [[False] * size for _ in range(size)]
 
     max_len = 1
     start = 0
 
-    for i in range(size):
-        dp[i][i] = True
-
+    """
+    只需计算表的对角线右上部分
+    """
     for j in range(1, size):
         for i in range(0, j):
             if s[i] == s[j]:
@@ -95,7 +96,7 @@ def longestPalindrome(self, s: str) -> str:
                 else:
                     dp[i][j] = dp[i + 1][j - 1]
             else:
-                dp[i][j] = False
+                continue
 
             if dp[i][j]:
                 cur_len = j - i + 1
@@ -105,7 +106,3 @@ def longestPalindrome(self, s: str) -> str:
     return s[start:start + max_len]
 
 
-
-# res[i] += c： 把每个字符 c 填入对应行 s_is
-# i += flag： 更新当前字符 c 对应的行索引；
-# flag = - flag： 在达到 ZZ 字形转折点时，执行反向。
