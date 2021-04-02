@@ -43,13 +43,25 @@ class TreeNode:
 
         print(TreeNode.val)
 
-    def graorder(self, TreeNode):
+    def bfs_order(self, TreeNode):
         """
+        时间空间复杂度为 O(n)
         BFS 广度优先遍历
         :param root:
         :return:
         """
-        pass
+        queue = [TreeNode]  # 根结点入队
+        res = []
+        while len(queue) > 0:
+            # 推出第一个元素
+            node: TreeNode = queue.pop(0)
+            res.append(node.val)
+            # 把左右结点入队
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return res
 
 
 class FindDepth:
