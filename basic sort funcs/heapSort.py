@@ -56,6 +56,7 @@ def build_heap(tree: [], n: int):
 
 def heap_sort(tree: [], n):
     # O(nlgn)
+    # 构造大根堆
     build_heap(tree, n)
     i = n - 1
     while i >= 0:

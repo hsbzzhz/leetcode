@@ -27,7 +27,7 @@ class Solution(object):
             mid = (l + r) // 2
             if nums[mid] == target:
                 return mid
-            if nums[mid] >= nums[l]:
+            if nums[mid] >= nums[l]:    # 比二分查找多的部分
                 # 如果落在大的数组区间
                 if nums[l] <= target < nums[mid]:
                     r = mid - 1
