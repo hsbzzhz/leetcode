@@ -10,6 +10,7 @@
  1. 构建一个二叉树，然后转换为大根堆
  2. 把堆顶元素依次取出，就是依次取最大的元素
  """
+from typing import List
 
 
 def heapify(tree: [], n: int, i: int):
@@ -80,3 +81,20 @@ print(tree)
 ref. 
 https://zhuanlan.zhihu.com/p/80371429
 """
+
+
+def findKthLargest(self, nums: List[int], k: int) -> int:
+    """
+    215. 数组中的第K个最大元素
+    :param self:
+    :param nums:
+    :param k:
+    :return:
+    """
+    n = len(nums)
+    self.build_heap(nums, n)
+    for i in range(k - 1):
+        nums[n - 1], nums[0] = nums[0], nums[n - 1]
+        n -= 1
+        self.heapify(nums, n, 0)
+    return nums[0]

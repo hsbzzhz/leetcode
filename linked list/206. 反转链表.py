@@ -45,4 +45,4 @@ class Solution:
             # pre和cur节点都前进一位
             prev = curr
             curr = temp
-        return  prev
+        return prev

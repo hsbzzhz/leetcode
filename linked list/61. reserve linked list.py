@@ -29,14 +29,13 @@ def rotateRight(self, head: ListNode, k: int) -> ListNode:
     tail, length = head, 1
     # 1. 找到尾结点，形成环
     while tail.next:
+        # 获得链表长度
         tail, length = tail.next, length + 1
 
     tail.next = head
     # 2.向右移动尾部结点 length - k 步
     k = k % length
-    # 这段有问题，因为已经形成了环
-    # if k == 0:
-    #     return head
+    # 然后我们找到新链表的最后一个节点（即原链表的第 (n - 1) - (k mod n) 个节点）
     for _ in range(length - k):
         tail = tail.next
 
@@ -44,20 +43,3 @@ def rotateRight(self, head: ListNode, k: int) -> ListNode:
     head = tail.next
     tail.next = None
     return head
-
-
-    """
-    方法2： 
-    """
-    k, temp = k % length, head
-    if k == 0:
-        return head
-
-    for _ in range(length - k - 1):
-        temp = temp.next
-
-    new_head = temp.next
-    temp.next = None
-    tail.next = head
-
-    return new_head
