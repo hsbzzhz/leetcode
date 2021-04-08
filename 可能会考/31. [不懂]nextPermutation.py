@@ -30,16 +30,26 @@ class Solution(object):
 
     def nextPermutation(self, nums):
         """
-        从后往前找，找到第一个下降的位置，记为 k。注意k 以后的位置是降序的。 在样例中就是找到 3
+        1. 先找出最大的索引 k 满足 nums[k] < nums[k+1]，如果不存在，就翻转整个数组；
+        2. 再找出另一个最大索引 l 满足 nums[l] > nums[k]；
+        3. 交换 nums[l] 和 nums[k]；
+        4. 最后翻转 nums[k+1:]。
+        举个例子：
 
-        从 k 往后找，找到最小的比 k 要大的数。 找到 4
+        比如 nums = [1,2,7,4,3,1]，下一个排列是什么？
 
-        将两者交换。注意此时 k 以后的位置仍然是降序的。
+        我们找到第一个最大索引是 nums[1] = 2
 
-        直接将 k 以后的部分翻转（变为升序）。
+        再找到第二个最大索引是 nums[4] = 3
 
-        作者：AC_OIer
-        链接：https://leetcode-cn.com/problems/next-permutation/solution/miao-dong-xi-lie-100-cong-xia-yi-ge-pai-gog8j/
+        交换，nums = [1,3,7,4,2,1];
+
+        翻转，nums = [1,3,1,2,4,7]
+
+        完毕!
+
+        作者：powcai
+        链接：https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-by-powcai/
         来源：力扣（LeetCode）
         著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
         :type nums: List[int]
@@ -48,9 +58,4 @@ class Solution(object):
         if len(nums) <= 1:
             return None
 
-        i = len(nums) - 2
-        while i >= 0 & nums[i] >= nums[i + 1]:
-            # 找到第一个非生序的相邻数
-            i -= 1
-        if i < 0:
-            nums = nums[::-1]
+        pass

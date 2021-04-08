@@ -33,7 +33,7 @@ class Solution:
 
             :param nums:
             :param p: 当前要拿 从第一位开始
-            :param q: 为链表尾部
+            :param q: 为链表尾部，可以不要
             :return:
             """
             if p == q:

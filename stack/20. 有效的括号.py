@@ -30,7 +30,7 @@ class Solution:
             if each in pairs:
                 if not stack or stack[-1] != pairs[each]:
                     return False
-                stack.pop()
+                stack.pop()  # 默认最后一个元素
             else:
                 stack.append(each)
         return not stack

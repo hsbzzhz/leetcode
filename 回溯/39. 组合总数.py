@@ -33,6 +33,12 @@ candidates 中的数字可以无限制重复被选取。
 
 class Solution:
     def combinationSum(self, candidates: [int], target: int) -> [[int]]:
+        """
+        做减法
+        :param candidates:
+        :param target:
+        :return:
+        """
         res = list()
         candidates.sort()
         def backtrace(candidates:[] ,path: [int], start: int, target: int):

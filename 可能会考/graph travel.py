@@ -22,7 +22,8 @@ def dfs(graph: [], start):
     visited.add(start)
     while stack:
         vertex = stack.pop(-1)  # 弹出栈顶元素
-        nodes = graph[vertex]   # 出队节点队的相邻节点
+        nodes = graph[vertex]   # 出队节点队的相邻节
+        
         for w in nodes:
             if w not in visited:  # 确保不重复
                 stack.append(w)
