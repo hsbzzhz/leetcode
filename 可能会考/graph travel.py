@@ -1,14 +1,7 @@
 class Solution:
     """
-    graph = {
-    "A": ["B", "C"],
-    “B”: [“A”, “C”, “D”],
-    “C”: [“A”, “B”, “D”, “E”],
-    “D”: [“B”, “C”, “E”, “F”],
-    “E”: [“C”, “D”],
-    “F”: [“D”]
-    }
     """
+
     def bfs(self, graph: [], start):
         queue = list()
         # 入队
@@ -32,10 +25,56 @@ class Solution:
         visited.add(start)
         while stack:
             vertex = stack.pop(-1)  # 弹出栈顶元素
-            nodes = graph[vertex]   # 出队节点队的相邻节
+            nodes = graph[vertex]  # 出队节点队的相邻节
 
             for w in nodes:
                 if w not in visited:  # 确保不重复
                     stack.append(w)
                     visited.add(w)
-            print(vertex)   # 打印出stack元素
+            print(vertex)  # 打印出stack元素
+
+    def dfs_recursion(self, graph: [], start):
+        """
+        不需要用到栈
+        :param graph:
+        :param start:
+        :return:
+        """
+
+        def dfs(node):
+            self.visited.add(node)
+            print(node)
+            children = graph[node]
+            for each in children:
+                if not each in self.visited:
+                    dfs(each)
+
+        self.visited = set()
+        dfs(start)
+
+    """
+    判断一个图中是否存在环
+    """
+
+
+demo = Solution()
+graph = {
+    "A": ["B", "C"],
+    "B": ["A", "C", "D"],
+    "C": ["A", "B", "D", "E"],
+    "D": ["B", "C", "E", "F"],
+    "E": ["C", "D"],
+    "F": ["D"]
+}
+
+graph1 = {
+    "A": ["B", "E"],
+    "B": ["A", "C"],
+    "C": ["B", "D"],
+    "D": ["C", "F"],
+    "E": ["A"],
+    "F": ["D"]
+}
+
+# demo.dfs(graph, 'A')
+demo.dfs_recursion(graph1, "A")

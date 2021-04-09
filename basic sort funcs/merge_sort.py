@@ -37,7 +37,7 @@ def merge(left, right):
     return result
 
 
-# test case
+# a_test case
 srr = [13, 4, 5, 12, 15, 21, 16, 23, 89]
 res = SortDemo(srr)
 print(res)
