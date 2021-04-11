@@ -42,19 +42,42 @@ class Solution:
         """
 
         def dfs(node):
-            self.visited.add(node)
+            visited.add(node)
             print(node)
             children = graph[node]
             for each in children:
-                if not each in self.visited:
+                if not each in visited:
                     dfs(each)
 
-        self.visited = set()
+        visited = set()
         dfs(start)
 
     """
     判断一个图中是否存在环
     """
+
+    def find_circle(self, graph: []) -> bool:
+        # color = 0 该节点暂未访问
+        # color = -1 该节点访问了一次
+        # color = 1 该节点的所有孩子节点都已访问,就不会再对它做DFS了
+        def dfs(node, color):
+            is_circle = False
+            color[node] = -1
+            for each in graph[node]:
+                if color[each] == 1:
+                    return True
+                elif color[each] == 0:
+                    is_circle = dfs(each, color)
+            color[node] = 1
+            return is_circle
+
+        color = {i: 0 for i in graph.keys()}
+        for each in graph:
+            if color[each] == 0:
+                has_circle = dfs(each, color)
+                if has_circle:
+                    return True
+        return False
 
 
 demo = Solution()
@@ -69,12 +92,14 @@ graph = {
 
 graph1 = {
     "A": ["B", "E"],
-    "B": ["A", "C"],
+    "B": ["A", "C", "E"],
     "C": ["B", "D"],
     "D": ["C", "F"],
-    "E": ["A"],
+    "E": ["A", "B"],
     "F": ["D"]
 }
 
 # demo.dfs(graph, 'A')
-demo.dfs_recursion(graph1, "A")
+# demo.dfs_recursion(graph1, "A")
+res = demo.find_circle(graph1)
+print(res)
