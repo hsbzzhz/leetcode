@@ -57,6 +57,7 @@ class Solution:
     """
 
     def find_circle(self, graph: []) -> bool:
+        # 应该是如果该结点为-1即有环，但也要考虑父节点
         # color = 0 该节点暂未访问
         # color = -1 该节点访问了一次
         # color = 1 该节点的所有孩子节点都已访问,就不会再对它做DFS了
