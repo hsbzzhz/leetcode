@@ -1,33 +1,53 @@
 class UnionFind(object):
-    """并查集"""
-    def __init__(self, n):
-        self.uf = [-1 for i in range(n + 1)]  # 列表0位置空出
-        self.sets_count = n  # 判断并查集里共有几个集合, 初始化默认互相独立
 
-    def find_root(self, p):
-        """查找p的根结点(祖先)"""
-        r = p                                   # 初始p
-        while self.uf[p] > 0:
-            p = self.uf[p]
-        while r != p:                           # 路径压缩, 把搜索下来的结点祖先全指向根结点
-            self.uf[r], r = p, self.uf[r]
-        return p
+    # def __init__(self, edges: [], parent: [], rank: []):
+    #     self.edges = edges
+    #     self.parent = parent
+    #     self.rank = rank
 
-    def union(self, p, q):
-        """连通p,q 让q指向p"""
-        proot = self.find_root(p)
-        qroot = self.find_root(q)
-        if proot == qroot:
-            return
-        elif self.uf[proot] > self.uf[qroot]:  # 负数比较, 左边规模更小
-            self.uf[qroot] += self.uf[proot]
-            self.uf[proot] = qroot
+
+    def find_root(self, x, parent: []):
+        # 找到根结点
+        x_root = x
+        while parent[x_root] != -1:
+            x_root = parent[x_root]
+        return x_root
+
+    def union_vertices(self, x, y, parent, rank):
+        # 合并两个集合
+        x_root = self.find_root(x, parent)
+        y_root = self.find_root(y, parent)
+
+        if x_root == y_root:
+            return 0
         else:
-            self.uf[proot] += self.uf[qroot]  # 规模相加
-            self.uf[qroot] = proot
-        self.sets_count -= 1  # 连通后集合总数减一
+            if rank[x_root] > rank[y_root]:
+                parent[y_root] = x_root
+            elif rank[x_root] < rank[y_root]:
+                parent[x_root] = y_root
+            else:
+                parent[x_root] = y_root
+                rank[y_root] +=1
+            return 1
 
-    def is_connected(self, p, q):
-        """判断pq是否已经连通"""
-        return self.find_root(p) == self.find_root(q)   # 即判断两个结点是否是属于同一个祖先
+
+if __name__ == '__main__':
+    union_find = UnionFind()
+    edges = [[0,1],[1,2],[1,3],[3,4],[2,5]]
+    vertice_nums = 5
+    parent = [-1 for _ in range(vertice_nums)]
+    rank = [0 for _ in range(vertice_nums)]
+
+    for i in range(vertice_nums):
+        print(i)
+        x = edges[i][0]
+        y = edges[i][1]
+        if union_find.union_vertices(x, y, parent, rank) == 0:
+            print("cycle detected!")
+            exit(0)
+    print("no cycle found")
+
+
+
 # https://www.cnblogs.com/asdfknjhu/p/12515480.html
+# https://www.cnblogs.com/yscl/p/10185293.html
