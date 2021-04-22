@@ -5,6 +5,11 @@ https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
 
 class Solution(object):
 	def levelOrder(self, root):
+		"""
+		O(n)
+		:param root:
+		:return:
+		"""
 		if not root:
 			return []
 		queue = [root]
@@ -13,7 +18,7 @@ class Solution(object):
 			each_level = []
 			for _ in range(len(queue)):
 				node = queue.pop(0)
-				each_level.append(node.val)
+				each_level.append(node.val)  # 在队尾添加元素
 				if node.left:
 					queue.append(node.left)
 				if node.right:

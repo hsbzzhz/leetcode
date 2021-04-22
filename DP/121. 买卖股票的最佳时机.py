@@ -27,11 +27,11 @@ def maxProfit(self, prices):
     """
     if not prices:
         return 0
-    minPrice, maxPrice = prices[0], 0
+    minPrice, profit = prices[0], 0
     for index in range(len(prices)):
         minPrice = min(minPrice, prices[index])
-        maxPrice = max(maxPrice, prices[index] - minPrice)
-    return maxPrice
+        profit = max(profit, prices[index] - minPrice)
+    return profit
 
 
 def maxProfit2(self, prices: List[int]) -> int:
