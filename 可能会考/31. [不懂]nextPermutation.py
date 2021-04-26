@@ -56,6 +56,33 @@ class Solution(object):
         :rtype: None Do not return anything, modify nums in-place instead.
         """
         if len(nums) <= 1:
-            return None
+            return
+        i = len(nums) - 2
+        while i >= 0 and nums[i] >= nums[i+1]:
+            i -= 1
 
-        pass
+        targert_index = 0
+        for i in range(len(nums)-2, -1, -1):
+            if nums[i] < nums[i+1]:
+                targert_index = i
+                break
+        nums[targert_index+1:].sort()
+        for i in range(targert_index+1, len(nums)):
+            if nums[targert_index] < nums[i]:
+                nums[targert_index], nums[i] = nums[i], nums[targert_index]
+        return nums
+
+
+
+nums = [1,2,3,8,5,7,6,4]
+# demo = Solution()
+# res = demo.nextPermutation(nums)
+# print(res)
+# for i in range(len(nums)-2, -1, -1):
+#     # print(nums[i])
+#     if nums[i] < nums[i + 1]:
+#         print(i)
+#         # targert_index = len(nums) - i + 1
+#         # print(targert_index)
+
+print(nums[:5])
