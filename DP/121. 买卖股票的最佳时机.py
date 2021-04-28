@@ -18,50 +18,56 @@
 from typing import List
 
 
-def maxProfit(self, prices):
-    """
-    单次买卖，获得的最大利润
+class Stock(object):
+    def maxProfit(self, prices):
+        """
+        121. 买卖股票的最佳时机
+        单次买卖，获得的最大利润
 
-    :type prices: List[int]
-    :rtype: int
-    """
-    if not prices:
-        return 0
-    minPrice, profit = prices[0], 0
-    for index in range(len(prices)):
-        minPrice = min(minPrice, prices[index])
-        profit = max(profit, prices[index] - minPrice)
-    return profit
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices:
+            return 0
+        minPrice, profit = prices[0], 0
+        for index in range(len(prices)):
+            minPrice = min(minPrice, prices[index])
+            profit = max(profit, prices[index] - minPrice)
+        return profit
 
+    def maxProfit2(self, prices: List[int]) -> int:
+        """
+        O(n) O(1)
+        122. 买卖股票的最佳时机 II
+        允许多次买卖
+        如果有把卖出价格，那此方法不可行
+        :param self:
+        :param prices:
+        :return:
+        """
+        max_profit = 0
+        for i in range(1, len(prices)):
+            max_profit += max(0, prices[i] - prices[i - 1])
 
-def maxProfit2(self, prices: List[int]) -> int:
-    """
-    O(n) O(1)
-    122. 买卖股票的最佳时机 II
-    允许多次买卖
-    如果有把卖出价格，那此方法不可行
-    :param self:
-    :param prices:
-    :return:
-    """
-    max_profit = 0
-    for i in range(1, len(prices)):
-        max_profit += max(0, prices[i] - prices[i - 1])
+        return max_profit
 
-    return max_profit
+    def maxProfit3(self, prices: List[int]) -> int:
+        """
+        O(n) O(n)
+        :param self:
+        :param prices:
+        :return:
+        """
+        dp = [[0 for _ in range(2)] for _ in range(len(prices))]
+        dp[0][1] = - prices[0]
+        for i in range(1, len(prices)):
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])
+        return dp[len(prices) - 1][0]
 
-
-def maxProfit_dp(self, prices: List[int]) -> int:
     """
-    O(n) O(n)
-    :param self:
-    :param prices:
-    :return:
+    
+    dp[i][k][0]  第i天，最多进行了k次交易，手里没有持股
+    dp[i][k][1]  第i天，最多进行了k次交易，手里持股
+    
     """
-    dp = [[0 for _ in range(2)] for _ in range(len(prices))]
-    # [["." for _ in range(n)] for _ in range(n)]
-    dp[0][1] = - prices[0]
-    for i in range(1, len(prices)):
-        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
-        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])
-    return dp[len(prices) - 1][0]

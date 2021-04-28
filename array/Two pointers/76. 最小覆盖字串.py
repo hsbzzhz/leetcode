@@ -6,6 +6,17 @@ class Solution:
     记录每次达到条件的最小窗口范围
     https://leetcode-cn.com/problems/minimum-window-substring/
     """
+    def _sliding_window_template(self, s, t): # s for string, t for target
+        # 滑动窗口模板
+        left, right = 0, 0
+        while right < len(s):
+            right += 1
+            while t in 'window':
+                # 如果窗口包含了所有目标元素，可以缩小范围了
+                'window'.pop(s[left])
+                left += 1
+
+
     def check(self, hashmap: dict) -> bool:
         """
         如果遍历到了字符就把该val -1， 如果字典中所有val都小于1，那么说明窗口中已包含所有target中的元素
@@ -18,11 +29,14 @@ class Solution:
         return True
 
     def minWindow(self, s: str, t: str) -> str:
-        # 把 t 种的字符全部放入hashmap中，赋值为1
+        # 把 t 种的字符全部放入hashmap中，出现1次就+1
         target = {}
         for each in t:
             # 如果是 'aa' 的测试用例，则需改动val值
-            target[each] = 1
+            if each in target:
+                target[each] += 1
+            else:
+                target[each] = 1
         # 设置窗口左右边界
         left, right = 0, 0
         # 记录字符开始位置和长度

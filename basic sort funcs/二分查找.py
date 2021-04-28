@@ -1,4 +1,4 @@
-class sort(object):
+class Sort(object):
     def binary_search(self, lst: [], target):
         """
         循环实现： O(logn)
@@ -6,19 +6,26 @@ class sort(object):
         :param target:
         :return:
         """
-        low, high = 0, len(lst) -1
+        low, high = 0, len(lst) -1   # 注意
         while low <= high:
-            mid = (low+high)//2
-
+            mid = low + (high - low)//2
             if lst[mid] == target:
                 return mid
             elif lst[mid] > target:
                 high = mid - 1
-            else:
+            elif lst[mid] < target:
                 low = mid + 1
-
+        return -1  #没找到的情况
 
     def binary_recursion(self, lst: [], target, left, right):
+        """
+        递归实现
+        :param lst:
+        :param target:
+        :param left:
+        :param right:
+        :return:
+        """
         if left > right:
             # 递归出口
             return None
@@ -30,6 +37,40 @@ class sort(object):
         else:
             left = mid + 1
         return self.binary_recursion(lst, target, left, right)
+
+    def binary_left_bound(self, lst: [], target):
+        # 搜索区间为[left, right]
+        left, right = 0, len(lst) - 1
+        while left <= right:
+            # 循环返回条件是 left == right, 但是找到target会一直往左边缩进，直至两个指针指向同一个元素
+            mid = (left + right)//2
+            if lst[mid] == target:
+                # 收缩右侧边界，
+                right = mid - 1
+            elif lst[mid] < target:
+                left = mid + 1
+            elif lst[mid] > target:
+                right = mid - 1
+
+        # 检查left边界以及没有找到的情况
+        if left >= len(lst) or lst[left] != target:  # 只判断了有没有出右边界，因为 index是从0开始，难道还能index为负数?
+            return -1
+        return left
+
+    def binary_right_bound(self, lst:[], target):
+        left, right = 0, len(lst) - 1
+        while left <= right:
+            mid = (left + right)//2
+            if lst[mid] == target:
+                # 收缩左边界
+                left = mid + 1
+            elif lst[mid] < target:
+                left = mid + 1
+            elif lst[mid] > target:
+                right = mid - 1
+        if right < 0 or lst[right] != target:  # 检查right的越界情况
+            return -1
+        return right
 
 
 class Solution:
@@ -72,5 +113,10 @@ class Solution:
 demo = Solution()
 num1 = [1, 2]
 num2 = [3, 4]
-mid = demo.findMedianSortedArrays(num1, num2)
-print(mid)
+num3 = [1,2,2,2,3,4,8]
+# mid = demo.findMedianSortedArrays(num1, num2)
+
+paixu = Sort()
+# res = paixu.binary_left_bound(num3, 2)
+res = paixu.binary_right_bound(num3, 2)
+print(res)
