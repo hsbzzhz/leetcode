@@ -70,4 +70,53 @@ class Stock(object):
     dp[i][k][0]  第i天，最多进行了k次交易，手里没有持股
     dp[i][k][1]  第i天，最多进行了k次交易，手里持股
     
+    dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+                  max(   选择 rest ,       选择 sell         )
+
+    dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+                  max(   选择 rest ,       选择 buy     )
+    
+    ref.
+    https://labuladong.gitbook.io/algo/bi-du-wen-zhang/tuan-mie-gu-piao-wen-ti
+    
     """
+
+    def maxProfit_k_inf(self, prices):
+        n = len(prices)
+        dp_i_0, dp_i_1 = 0, float('-inf')
+        for i in range(n):
+            temp = dp_i_0
+            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+            dp_i_1 = max(dp_i_1, temp - prices[i])
+        return dp_i_0
+
+    def maxProfit5(self, k, prices):
+        """
+        :type k: int
+        :type prices: List[int]
+        :rtype: int
+        """
+        n = len(prices)
+        if k > n / 2:
+            return self.maxProfit_k_inf(prices)
+        dp = [[[0] * 2 for _ in range(k)] for _ in range(n)]
+
+        for i in range(k):
+            dp[0][i][0] = 0
+            dp[0][i][-1] = float('-inf')
+        for i in range(1, n):
+            # j = k
+            for j in range(1, k+1):
+                # if i == 0:
+                #     dp[i][j][0] = 0
+                #     dp[i][j][1] = float('-inf')
+                dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i])
+                dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i])
+                j -= 1
+        print(dp)
+        # return dp[n - 1][k][0]
+
+
+demo = Stock()
+res = demo.maxProfit5(2, [3,2,6,5,0,3])   # 7
+print(res)
