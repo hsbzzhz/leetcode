@@ -97,26 +97,51 @@ class Stock(object):
         :rtype: int
         """
         n = len(prices)
-        if k > n / 2:
-            return self.maxProfit_k_inf(prices)
-        dp = [[[0] * 2 for _ in range(k)] for _ in range(n)]
-
-        for i in range(k):
+        if k > n // 2:
+            # return self.maxProfit_k_inf(prices)
+            k = n//2
+        dp = [[[0] * 2 for _ in range(k+1)] for _ in range(n)]
+        # base case
+        for i in range(1, k+1):
             dp[0][i][0] = 0
-            dp[0][i][-1] = float('-inf')
+            dp[0][i][1] = -prices[0]
         for i in range(1, n):
-            # j = k
             for j in range(1, k+1):
-                # if i == 0:
-                #     dp[i][j][0] = 0
-                #     dp[i][j][1] = float('-inf')
                 dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i])
                 dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i])
-                j -= 1
-        print(dp)
-        # return dp[n - 1][k][0]
 
+        return dp[n - 1][k][0]
+
+    def maxProfit6(self, k, prices):
+        """
+        :type k: int
+        :type prices: List[int]
+        :rtype: int
+        """
+        n = len(prices)
+        if k > n / 2:
+            return self.maxProfit_k_inf(prices)
+
+        dp = [[[0] * 2 for _ in range(k+1)] for _ in range(n)]
+
+        # for i in range(k+1):
+        #     dp[0][i][0] = 0
+        #     dp[0][i][-1] = float('-inf')
+        for i in range(n):
+            # j = k
+            for j in range(1, k+1):
+                # k +1是因为k从1开始，循环要到k
+                if i == 0:  # base case
+                    dp[i][j][0] = 0
+                    dp[i][j][1] = float('-inf')
+                    continue
+                dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i])
+                dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i])
+                # j -= 1
+        print(dp)
+        return dp[n - 1][k][0]
 
 demo = Stock()
-res = demo.maxProfit5(2, [3,2,6,5,0,3])   # 7
+res = demo.maxProfit5(2, [1,2,4,2,5,7,2,4,9,0])   # 13
+# res = demo.maxProfit6(1, [1,2])
 print(res)
