@@ -33,7 +33,7 @@ from typing import List
 
 class Solution:
     def is_valid(self, board, row, col) -> bool:
-        # 仅用看列
+        # 检查列中是否有皇后冲突
         for r in range(row):  # r:0->row-1
             if board[r][col] == "Q":
                 return False

@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution(object):
     """
     33. 搜索旋转排序数组
@@ -12,33 +14,30 @@ class Solution(object):
     输入：nums = [4,5,6,7,0,1,2], target = 0
     输出：4
     """
-
-    def search(self, nums, target):
+    def search(self, nums: List[int], target: int) -> int:
         """
         二分查找法   O(logn)
         :type nums: List[int]
         :type target: int
         :rtype: int
         """
-        if not nums:
-            return -1
         l, r = 0, len(nums) - 1
+        # 右边一定是 len(nums) - 1
         while l <= r:
             mid = (l + r) // 2
             if nums[mid] == target:
                 return mid
-            if nums[mid] >= nums[l]:    # 比二分查找多的部分
-                # 如果落在大的数组区间
+            # 绝无可能 == mid
+            if nums[mid] < nums[l]:  # [mid, r] 之间有序
+                if nums[mid] < target <= nums[r]:  # 如果是到在（mid，r] 区间内
+                    l = mid + 1
+                else:   # if target < [mid] 或者根本不在区间内
+                    r = mid - 1
+            elif nums[mid] >= nums[l]:  # [l, mid] 之间有序
                 if nums[l] <= target < nums[mid]:
                     r = mid - 1
                 else:
                     l = mid + 1
-            else:
-                # 如果落在小的数组区间
-                if nums[mid] < target <= nums[r]:
-                    l = mid + 1
-                else:
-                    r = mid - 1
         return -1
 
     """
@@ -68,5 +67,5 @@ class Solution(object):
 
 test_case = [4, 5, 6, 7, 0, 1, 2]
 obj = Solution()
-res = obj.search(test_case, target=1)
+res = obj.search(test_case, target=3)
 print(res)
