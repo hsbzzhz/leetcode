@@ -47,6 +47,6 @@ class Solution:
                 # 跳出循环
                 return False
             slow = slow.next
-            fast = fast.next.next
+            fast = fast.next.next    # 如果是 fast.next.next.next 会怎么样
 
         return True
