@@ -20,11 +20,14 @@ class Solution:
     时间复杂度：O(m+n)
     """
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        # 递归终止条件
         if not l1: return l2
         if not l2: return l1
         if l1.val < l2.val:
             l1.next = self.mergeTwoLists(l1.next, l2)
             return l1
         else:
-            l2.next = self.mergeTwoLists(l2.next, l1)
+            l2.next = self.mergeTwoLists(l1, l2.next)
             return l2
+
+# ref. https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/yi-kan-jiu-hui-yi-xie-jiu-fei-xiang-jie-di-gui-by-/

@@ -14,32 +14,27 @@ class TreeNode:
     def preoder(self, TreeNode):
         # 前序遍历: 根 - 左 - 右
         if TreeNode is None:
-            return " "
+            return
         print(TreeNode.val)
-        if TreeNode.left:
-            self.preoder(TreeNode.left)
-        if TreeNode.right:
-            self.preoder(TreeNode.right)
+        self.preoder(TreeNode.left)
+        self.preoder(TreeNode.right)
 
     def inorder(self, TreeNode):
         # 中序遍历：左 - 根 - 右
         if TreeNode is None:
-            return " "
-        if TreeNode.left:
-            self.preoder(TreeNode.left)
+            return
+        self.inorder(TreeNode.left)
         print(TreeNode.val)
-        if TreeNode.right:
-            self.preoder(TreeNode.right)
+        self.inorder(TreeNode.right)
 
     def postorder(self, TreeNode):
         # 后序遍历： 左 - 右 - 根
         if TreeNode is None:
             return " "
         if TreeNode.left:
-            self.preoder(TreeNode.left)
-
+            self.postorder(TreeNode.left)
         if TreeNode.right:
-            self.preoder(TreeNode.right)
+            self.postorder(TreeNode.right)
 
         print(TreeNode.val)
 
@@ -98,14 +93,50 @@ class CompareTree(object):
         :type q: TreeNode
         :rtype: bool
         """
-        if p is None and q is None:
+        if p is None and q is None:   # 都为空的话，显然相同
             return True
-        elif p is None or q is None:
+        elif p is None or q is None:  # 一个为空，一个非空，显然不同
             return False
-        elif p.val != q.val:
+        elif p.val != q.val:  # 两个都非空，但 val 不一样也不行
             return False
         else:
+            # 分别比较p q两个的左右结点
             return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+
+class BST(object):
+    """
+    98. 验证搜索二叉树
+    https://leetcode-cn.com/problems/validate-binary-search-tree/
+    """
+    def isValidBST(self, root):
+        def is_valid_bst(root, min, max):
+            # O(n)
+            # https://mp.weixin.qq.com/s/SuGAvV9zOi4viaeyjWhzDw
+            if not root:  # base case
+                return True
+            # min 和 max 的限制
+            if min and root.val <= min.val:
+                return False
+            if max and root.val >= max.val:
+                return False
+            # 限定左子树的最大值是 root.val，右子树的最小值是 root.val
+            return is_valid_bst(root.left, min, root) and is_valid_bst(root.right, root, max)
+
+    def inorder(self, root, pre = float('-inf')):
+        """
+        todo @Hogan, not working
+        中序遍历递归版
+        :param root:
+        :return:
+        """
+        if not root:
+            return True
+        left = self.inorder(root.left, pre)
+        if root.val <= pre: return False
+        pre = root.val
+        right = self.inorder(root.right, pre)
+        return left and right
 
 
 class FindDif:

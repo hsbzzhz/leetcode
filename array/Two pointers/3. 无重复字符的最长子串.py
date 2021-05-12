@@ -62,25 +62,24 @@ class Solution:
 
         return count
 
+    def lengthOfLongestSubstring2(self, s):
+        """
+        不记录字符串位置，记录count
+        :type s: str
+        :rtype: int
+        """
+        visited = ''
+        count = 0
+        for char in s:
+            if char not in visited:
+                visited += char
+                count = max(count, len(visited))
+            else:
+                visited = visited[visited.index(char) + 1:] + char
+        return count
 
-target = "pwwkew"
+
+target = "dvdf"
 s = Solution()
-res = s.lengthOfLongestSubstring(target)
+res = s.lengthOfLongestSubstring2(target)
 print(res)
-
-# def lengthOfLongestSubstring2(self, s):
-#     """
-#     :type s: str
-#     :rtype: int
-#     """
-#     temp = ''
-#     length = 0
-#     for i in s:
-#         if i not in temp:
-#             temp += i
-#             length = max(length, len(temp))
-#         else:
-#             temp = temp[temp.index(i) + 1:] + i
-#             # temp += i
-#             # temp = temp[temp.index(i) + 1:]
-#     return length
