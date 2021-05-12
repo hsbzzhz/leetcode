@@ -58,6 +58,12 @@ class TreeNode:
                 queue.append(node.right)
         return res
 
+    def maxDepth(self, root):
+        # DFS 求深度
+        if not root:
+            return 0  # 依据不同情况返回不同值
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+
 
 class FindDepth:
     """
