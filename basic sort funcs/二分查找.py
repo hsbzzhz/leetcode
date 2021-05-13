@@ -76,11 +76,19 @@ class Sort(object):
 class Solution:
     def findMedianSortedArrays(self, nums1, nums2):
         """
+        4. 寻找两个正序数组的中位数
+        O(log(m+n))
+        https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
         :type nums1: List[int]
         :type nums2: List[int]
         :rtype: float
         """
         def find_target_by_index(index):
+            """
+            根据index，在两个排序中的列表中寻找元素
+            :param index:
+            :return:
+            """
             count, res = 0, 0
             p1, p2 = 0, 0
             while p1+p2 <= index:
@@ -98,13 +106,12 @@ class Solution:
                     p2 += 1
             return res
 
-        long = len(nums1) + len(nums2)
-        index = long // 2
-        if long %2 == 0:
+        sum_index = len(nums1) + len(nums2)
+        index = sum_index // 2
+        if sum_index % 2 == 0:
             res = (find_target_by_index(index)+find_target_by_index(index+1))/2
         else:
             res = find_target_by_index(index)
-
         return res
 
 

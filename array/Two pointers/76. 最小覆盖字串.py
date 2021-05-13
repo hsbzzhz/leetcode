@@ -40,7 +40,7 @@ class Solution:
         # 设置窗口左右边界
         left, right = 0, 0
         # 记录字符开始位置和长度
-        str_start, win_len = 0, len(s)
+        str_start, win_len = 0, len(s)+1
         while right < len(s):
             # 如果没有把t中所有字符包括在窗口中，那么就移动右指针
             char_r = s[right]
@@ -49,6 +49,7 @@ class Solution:
             right += 1
 
             while self.check(target):
+                # 找到答案，进行优化
                 # 缩小窗口， 左指针向右移动
                 if right - left < win_len:
                     win_len, str_start = right - left, left
