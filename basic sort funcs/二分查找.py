@@ -89,9 +89,9 @@ class Solution:
             :param index:
             :return:
             """
-            count, res = 0, 0
-            p1, p2 = 0, 0
-            while p1+p2 <= index:
+            res = 0, 0
+            p1, p2 = 0, 0  # 两个列表中，各放置一个指针
+            while p1+p2 < index:
                 if p1 >= len(nums1):
                     res = nums2[p2]
                     p2 += 1
@@ -107,23 +107,21 @@ class Solution:
             return res
 
         sum_index = len(nums1) + len(nums2)
-        index = sum_index // 2
+        i = sum_index // 2
         if sum_index % 2 == 0:
-            res = (find_target_by_index(index)+find_target_by_index(index+1))/2
+            res = (find_target_by_index(i)+find_target_by_index(i+1))/2
         else:
-            res = find_target_by_index(index)
+            res = find_target_by_index(i+1)
         return res
 
 
-
-
 demo = Solution()
-num1 = [1, 2]
-num2 = [3, 4]
+num1 = [1, 3]
+num2 = [2]
 num3 = [1,2,2,2,3,4,8]
-# mid = demo.findMedianSortedArrays(num1, num2)
-
-paixu = Sort()
-# res = paixu.binary_left_bound(num3, 2)
-res = paixu.binary_right_bound(num3, 2)
-print(res)
+mid = demo.findMedianSortedArrays(num1, num2)
+print(mid)
+# paixu = Sort()
+# # res = paixu.binary_left_bound(num3, 2)
+# res = paixu.binary_right_bound(num3, 2)
+# print(res)
