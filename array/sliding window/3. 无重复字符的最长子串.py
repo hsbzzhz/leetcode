@@ -46,19 +46,22 @@ class Solution:
         :param s:
         :return:
         """
-        if len(s) < 1:
-            return 0
-        i = j = 0
+        left, right = 0, 0
         visited = {}  # {'b':3}
         count = 0
-        while j < len(s):
-            if i != j and s[j] in visited:
-                # abba 这种情况，确保不能往后退，更新i的位置
-                i = max(visited[s[j]] + 1, i)
-
-            count = max(j - i + 1, count)
-            visited.update({s[j]: j})  # 更新最新元素的位置
-            j += 1
+        while right < len(s):
+            char_r = s[right]
+            if char_r not in visited:
+                visited[char_r] = 1
+            else:
+                visited[char_r] += 1
+            right +=1
+            # 开始滑动窗口
+            while visited[char_r] > 1:
+                char_l = s[left]
+                visited[char_l] -= 1
+                left += 1
+            count = max(count, right - left)
 
         return count
 
@@ -78,8 +81,31 @@ class Solution:
                 visited = visited[visited.index(char) + 1:] + char
         return count
 
+    def lengthOfLongestSubstring3(self, s: str) -> int:
+        """
+        想不清楚，不应该在else里进行统计，
+        :param s:
+        :return:
+        """
+        if len(s) < 1:
+            return 0
+        i = j = 0
+        count = 0
+        visited = set()
+        while j < len(s):
+            if s[j] not in visited:
+                visited.add(s[j])
+                # count = max(count, j - i)
+            else:
+                count = max(count, j - i)
+                i += 1
+                # visited.remove(s[j])
+            j += 1
 
-target = "dvdf"
+        return count
+
+
+target = "pwwkew"
 s = Solution()
-res = s.lengthOfLongestSubstring2(target)
+res = s.lengthOfLongestSubstring(target)
 print(res)
