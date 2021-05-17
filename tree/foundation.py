@@ -129,19 +129,21 @@ class BST(object):
             # 限定左子树的最大值是 root.val，右子树的最小值是 root.val
             return is_valid_bst(root.left, min, root) and is_valid_bst(root.right, root, max)
 
-    def inorder(self, root, pre = float('-inf')):
+    pre = float('-inf')
+    def inorder(self, root):
         """
-        todo @Hogan, not working
+        闭包实现，
         中序遍历递归版
         :param root:
         :return:
         """
+        nonlocal pre
         if not root:
             return True
-        left = self.inorder(root.left, pre)
+        left = self.inorder(root.left)
         if root.val <= pre: return False
         pre = root.val
-        right = self.inorder(root.right, pre)
+        right = self.inorder(root.right)
         return left and right
 
 
