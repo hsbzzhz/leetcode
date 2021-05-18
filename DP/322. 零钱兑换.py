@@ -1,10 +1,17 @@
 
 class Solution(object):
+    # 给定不同面额的硬币 coins 和一个总金额 amount。
+    # 编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
+    #
+    #
+    # 来源：力扣（LeetCode）
+    # 链接：https: // leetcode - cn.com / problems / coin - change
+    # 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     # ref.
     # https://github.com/labuladong/fucking-algorithm/blob/master/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%AF%A6%E8%A7%A3%E8%BF%9B%E9%98%B6.md
     def coinChange1(self, coins, amount):
         """
-        原始的递归，没有解决子问题重复计算的问题
+        1. 原始的递归，没有解决子问题重复计算的问题
         复杂度是指数级别的 O(n^k)
         :param coins:
         :param amount:
@@ -24,6 +31,7 @@ class Solution(object):
 
     def coinChange2(self, coins, amount):
         """
+        2. 带备忘录的递归
         k是面值的数目，n是总额
         引入了字典来存储子问题答案
         O(kn)
@@ -51,6 +59,7 @@ class Solution(object):
 
     def coinChange3(self, coins, amount):
         """
+        3. dp 数组迭代法
         k是面值的数目，n是总额
         O(kn)
         dp 中存储的是额度为i 的 最小方法个数
@@ -60,8 +69,11 @@ class Solution(object):
         """
         dp = [float('inf')] * (amount + 1)
         dp[0] = 0
-        for coin in coins:
-            for i in range(coin, amount+1):
-                dp[i] = min(dp[i], dp[i-coin] + 1)
+        # 遍历 dp table
+        for i in range(len(dp)):
+            for coin in coins:
+                # 子问题无解的情况，跳过
+                if i - coin < 0: continue
+                dp[i] = min(dp[i], 1 + dp[i - coin])
         return dp[amount] if dp[amount] != float('inf') else -1
 
