@@ -18,5 +18,5 @@ class Solution:
         return res
 
 demo = Solution()
-res = demo.topKFrequent([3,0,1,0],1)
+res = demo.topKFrequent([3, 0, 1, 0], 1)
 print(res)

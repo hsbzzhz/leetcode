@@ -2,6 +2,7 @@ class SortDemo1(object):
     def SortDemo(self, arr):
         """
         O(nlogn)
+        先分后治
         最坏情况也能保证 O(nlogn)
         mergeSort是分, 把列表分开
         :param arr:
@@ -12,7 +13,7 @@ class SortDemo1(object):
         middle = len(arr) // 2
         left, right = arr[:middle], arr[middle:]
         # 最后把多个列表合并
-        return merge(mergeSort(left), mergeSort(right))
+        return self.merge(self.SortDemo(left), self.SortDemo(right))
 
     def merge(self, left, right):
         """
@@ -31,6 +32,7 @@ class SortDemo1(object):
                 result.append(right.pop(0))
         # 单个list存在元素的情况
         while left:
+            # 单个元素操作起来，效率十分低下
             result.append(left.pop(0))
         while right:
             result.append(right.pop(0))
@@ -39,7 +41,8 @@ class SortDemo1(object):
 
 if __name__ == '__main__':
     srr = [13, 4, 5, 12, 15, 21, 16, 23, 89]
-    res = SortDemo(srr)
+    demo = SortDemo1()
+    res = demo.SortDemo(srr)
     print(res)
 
 #########################################################################################

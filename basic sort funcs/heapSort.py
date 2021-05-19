@@ -2,13 +2,15 @@
 完全二叉树：
  1. 生成结点顺序，从上往下，从左往右 （对树的深度有要求）
 堆（大根堆）：
- 1. 完全二叉树
+ 1. 完全二叉树 (生成结点的顺序是从上往下，从左往右)
  2. 父节点大于子节点
 
 
  堆排序：
  1. 构建一个二叉树，然后转换为大根堆
  2. 把堆顶元素依次取出，就是依次取最大的元素
+
+ ref. https://www.bilibili.com/video/BV1Eb41147dK
  """
 from typing import List
 
@@ -16,9 +18,9 @@ from typing import List
 class heapSort:
     def heapify(self, tree: [], n: int, i: int):
         """
-        在堆中做结构调整使得父节点的值大于子节点
+        从一个结点出发，做交换（使得父节点的值大于子节点），对该结点的交换的子树一并做堆化
 
-        时间复杂度O(h), h为堆的高度
+        时间复杂度 O(h), h为堆的高度
         :param tree: 待排数组
         :param n: 树中结点个数
         :param i: 对哪个结点开始至树的结尾做操作
@@ -45,7 +47,7 @@ class heapSort:
         """
         构造一个堆，将堆中所有数据重新排序
 
-        时间复杂度O(nlgn)
+        时间复杂度 O(nlgn)
         从最后一个结点的父结点依次向上调用堆化，即可完成
         :param tree:
         :param n: 总共结点个数
@@ -74,7 +76,7 @@ class heapSort:
             i -= 1
 
 
-tree = [4, 17, 5, 1, 2, 3, 7]
+tree = [2, 4, 5, 1, 17, 3, 7]
 heapsort = heapSort()
 heapsort.heapify(tree, len(tree), 0)
 print(tree)
