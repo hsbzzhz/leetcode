@@ -6,7 +6,7 @@ class Sort(object):
         :param target:
         :return:
         """
-        low, high = 0, len(lst) -1   # 注意
+        low, high = 0, len(lst) - 1   # 注意
         while low <= high:
             mid = low + (high - low)//2
             if lst[mid] == target:
@@ -15,7 +15,8 @@ class Sort(object):
                 high = mid - 1
             elif lst[mid] < target:
                 low = mid + 1
-        return -1  #没找到的情况
+        # 没找到的情况
+        return -1
 
     def binary_recursion(self, lst: [], target, left, right):
         """
@@ -38,6 +39,7 @@ class Sort(object):
             left = mid + 1
         return self.binary_recursion(lst, target, left, right)
 
+    # 二分查找计算左右边界
     def binary_left_bound(self, lst: [], target):
         # 搜索区间为[left, right]
         left, right = 0, len(lst) - 1
