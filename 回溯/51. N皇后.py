@@ -1,61 +1,53 @@
-"""
-回溯的核心框架：
-
-result = []
-def backtrack(路径, 选择列表):
-    if 满足结束条件:
-        result.add(路径)
-        return
-
-    for 选择 in 选择列表:
-        做选择
-        backtrack(路径, 选择列表)
-        撤销选择
-"""
-
-
-def is_valid(board: [], row, col):
-    for i in range(row):
-        """
-        不能同列，和同对角线
-        p.s. 同行的情况已经排除
-        """
-        if board[i] == col:
-            # 同列
-            return False
-        elif abs(board[i] - col) == abs(i - row):
-            return False
-        return True
-
-
 from typing import List
 
 
 class Solution:
-    def is_valid(self, board, row, col) -> bool:
+    """
+    n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+
+    给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。
+
+    每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+
+    示例 1：
+    输入：n = 4
+    输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+    解释：如上图所示，4 皇后问题存在两个不同的解法。
+
+    来源：力扣（LeetCode）
+    链接：https://leetcode-cn.com/problems/n-queens
+    著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+    """
+    def is_valid(self, board, row, col) -> bool:   # 减枝
         # 检查列中是否有皇后冲突
-        for r in range(row):  # r:0->row-1
-            if board[r][col] == "Q":
+        for i in range(row):  # r:0->row-1
+            if board[i][col] == "Q":
                 return False
         # 判断(左上角)主对角线：判断[0:row-1,0:col-1]是否有'Q'
-        mrow, mcol = row, col
-        while mrow > 0 and mcol > 0:  # mrow:0->row-1,mcol:0->row-1
-            mrow -= 1
-            mcol -= 1
-            if board[mrow][mcol] == "Q":
+        i, j = row, col
+        while i > 0 and j > 0:  # mrow:0->row-1,  mcol:0->row-1
+            i -= 1
+            j -= 1
+            if board[i][j] == "Q":
                 return False
-        # 判断(右上角)副对角线：判断[0:row-1,col+1:n]
-        vrow, vcol = row, col
-        while vrow > 0 and vcol < len(board) - 1:  # vrow:0->row-1,vcol:col+1->n
-            vrow -= 1
-            vcol += 1
-            if board[vrow][vcol] == "Q":
+        # 判断(右上角)副对角线：判断 [0:row-1,col+1:n]
+        i, j = row, col
+        while i > 0 and j < len(board) - 1:  # vrow:0->row-1,vcol:col+1->n
+            i -= 1
+            j += 1
+            if board[i][j] == "Q":
                 return False
         return True
 
     def solveNQueens(self, n: int) -> List[List[str]]:
-        self.res = []
-
+        """
+        * 路径：board 中小于 row 的那些行都已经成功放置了皇后
+        * 选择列表：第 row 行的所有列都是放置皇后的选择
+        * 结束条件：row 超过 board 的最后一行
+        :param n:
+        :return:
+        """
         def backtrack(board: [], row):
             if row == n:
                 temp = []
@@ -64,17 +56,21 @@ class Solution:
                     temp.append(t)
                 self.res.append(temp)
                 return
-            else:
-                for col in range(len(board)):
-                    if not self.is_valid(board, row, col):
-                        continue
-                    board[row][col] = "Q"
-                    backtrack(board, row + 1)
-                    board[row][col] = "."
 
+            for col in range(len(board)):
+                if not self.is_valid(board, row, col):
+                    continue
+                # 选择，将棋盘位置改为 Q
+                board[row][col] = "Q"
+                # 进入下一行决策
+                backtrack(board, row + 1)
+                # 还原，撤销选择
+                board[row][col] = "."
+
+        # 初始化棋盘
         checkboard = [["." for _ in range(n)] for _ in range(n)]
-
-        backtrack(checkboard, 0)
+        self.res = []
+        backtrack(checkboard, 0)  # 从 0 开始，直至到整个长度
         return self.res
 
 

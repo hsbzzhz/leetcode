@@ -1,5 +1,18 @@
 class Solution:
     """
+    回溯的核心框架：
+
+                        result = []
+                        def backtrack(路径, 选择列表):
+                            if 满足结束条件:
+                                result.add(路径)
+                                return
+
+                            for 选择 in 选择列表:
+                                做选择
+                                backtrack(路径, 选择列表)
+                                撤销选择
+
     给定一个 没有重复 数字的序列，返回其所有可能的全排列。
 
     示例:
@@ -20,9 +33,10 @@ class Solution:
     链接：https://leetcode-cn.com/problems/permutations
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
-    def permute(self, nums):
+    def permute_compact(self, nums):
         """
-        回溯
+        @todo 不要看
+        更加简洁的方法，使用指针
         时间复杂度：O(n×n!)，其中 n 为序列的长度
         :param nums:
         :return:
@@ -53,7 +67,41 @@ class Solution:
         backtrack(nums, 0, len(nums))
         return res
 
+    def permute(self, nums):
+        """
+        回溯
+        时间复杂度：O(n×n!)，其中 n 为序列的长度
+        :param nums:
+        :return:
+        """
+        def backtrack(nums: [], track: []):
+            """
+
+            :param nums: 选择列表
+            :param track: 路径
+            :return:
+            """
+            # 当 nums 中的元素全都在 track 中出现时，
+            if len(track) == len(nums):
+                res.append(track[:])
+                return
+            for i in range(len(nums)):
+                # 排除不合法的选择，重复解 (减枝)
+                if nums[i] in track:
+                    continue
+                # 做选择
+                track.append(nums[i])
+                # 进入下一层决策树
+                backtrack(nums, track)
+                # 撤销选择
+                track.pop(-1)
+
+        res, track = [], []
+        backtrack(nums, track)
+        return res
+
 
 demo = Solution()
 nums = [1, 2, 3]
+print(demo.permute_compact(nums))
 print(demo.permute(nums))
