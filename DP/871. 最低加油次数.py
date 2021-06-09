@@ -60,12 +60,14 @@ class Solution:
         """
         for i in range(1, n + 1):    # 0 为初始
             for j in range(1, i):
-                if dp[i - 1][j] >= stations[i - 1][0]:    # todo 不懂
-                    # 上一站，本站不加油
+                if dp[i - 1][j] >= stations[i - 1][0]:   # todo 不懂
+                    # 本站不加油，的前提是不加油的情况可以到油站
                     dp[i][j] = dp[i - 1][j]
                 if dp[i - 1][j - 1] >= stations[i - 1][0]:
                     # 前 i-1 站加 j-1 次，本站加油
-                    dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + stations[i - 1][1])  # todo 不懂
+                    dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + stations[i - 1][1])   # todo 不懂
+                # or
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - 1] + stations[i - 1][1])
         for i in range(n + 1):
             if dp[n][i] >= target:
                 return i
@@ -75,4 +77,6 @@ class Solution:
 """
 Ref.
 https://leetcode-cn.com/problems/minimum-number-of-refueling-stops/solution/yi-wei-lao-xiao-bai-de-dpjie-jue-tan-suo-zhi-lu-by/
+优先队列+贪心：
+https://leetcode-cn.com/problems/minimum-number-of-refueling-stops/solution/tan-xin-fa-jie-jia-you-zhan-wen-ti-by-arvin-3e/
 """
