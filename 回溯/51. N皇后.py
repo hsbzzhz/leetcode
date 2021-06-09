@@ -49,6 +49,7 @@ class Solution:
         :return:
         """
         def backtrack(board: [], row):
+            # 对每一行进行验证
             if row == n:
                 temp = []
                 for line in board:
@@ -63,7 +64,7 @@ class Solution:
                 # 选择，将棋盘位置改为 Q
                 board[row][col] = "Q"
                 # 进入下一行决策
-                backtrack(board, row + 1)
+                backtrack(board, row + 1)  # 切换到下一行
                 # 还原，撤销选择
                 board[row][col] = "."
 

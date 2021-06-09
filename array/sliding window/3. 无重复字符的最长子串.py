@@ -30,6 +30,16 @@
 
 """
 
+# 滑动窗口模板
+def _sliding_window_template(self, s, t):  # s for string, t for target
+    left, right = 0, 0
+    while right < len(s):
+        'window'.add(s[right])
+        right += 1
+        while t in 'window':
+            # 如果窗口包含了所有目标元素，可以缩小范围了
+            'window'.pop(s[left])
+            left += 1
 
 class Solution:
     """

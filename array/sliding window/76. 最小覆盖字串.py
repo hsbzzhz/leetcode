@@ -6,15 +6,6 @@ class Solution:
     记录每次达到条件的最小窗口范围
     https://leetcode-cn.com/problems/minimum-window-substring/
     """
-    def _sliding_window_template(self, s, t): # s for string, t for target
-        # 滑动窗口模板
-        left, right = 0, 0
-        while right < len(s):
-            right += 1
-            while t in 'window':
-                # 如果窗口包含了所有目标元素，可以缩小范围了
-                'window'.pop(s[left])
-                left += 1
 
 
     def check(self, hashmap: dict) -> bool:

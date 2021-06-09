@@ -18,7 +18,7 @@ from typing import List
 class heapSort:
     def heapify(self, tree: [], n: int, i: int):
         """
-        从一个结点出发，做交换（使得父节点的值大于子节点），对该结点的交换的子树一并做堆化
+        从一个结点出发，做交换（使得父节点的值大于子节点），对该结点 下沉 堆化处理
 
         时间复杂度 O(h), h为堆的高度
         :param tree: 待排数组
