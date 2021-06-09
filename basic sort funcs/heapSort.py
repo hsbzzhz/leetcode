@@ -23,7 +23,7 @@ class heapSort:
         时间复杂度 O(h), h为堆的高度
         :param tree: 待排数组
         :param n: 树中结点个数
-        :param i: 对哪个结点开始至树的结尾做操作
+        :param i: 对哪个结点开始至树的结尾做操作，倒数第二层
         :return:
         """
         # 跳出递归条件
@@ -42,7 +42,6 @@ class heapSort:
             # 对该结点子树进行堆化操作, 为了寻找子节点中可能存在最大的数
             self.heapify(tree, n, max_index)
 
-
     def build_heap(self, tree: [], n: int):
         """
         构造一个堆，将堆中所有数据重新排序
@@ -60,7 +59,6 @@ class heapSort:
             # 最终整个树都满足大顶堆的性质
             self.heapify(tree, n, last_parent)
             last_parent -= 1
-
 
     def heap_sort(self, tree: [], n):
         # O(nlgn)

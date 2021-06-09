@@ -11,7 +11,7 @@
 
 注意：如果汽车到达加油站时剩余燃料为 0，它仍然可以在那里加油。如果汽车到达目的地时剩余燃料为 0，仍然认为它已经到达目的地。
 
- 
+
 
 示例 1：
 
@@ -50,23 +50,22 @@ class Solution:
         n = len(stations)
         # dp[][] 经过i 个加油站，加油 j 次 = 能行驶的最大距离
         dp = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
-        # 开成n + 1 的长度是因为把起点视为第0个加油站：起始状态处理
-        # 甭管经过了几个站，一次油也不加那最多跑的就是startFuel的距离
+        # dp 长度是 n + 1 的长度是因为把起点视为第0个加油站：起始状态处理
+        # 不管经过了几个站，一次油也不加那最多跑的就是startFuel的距离
         for i in range(n+1):
             dp[i][0] = startFuel
         """
         第站i， 有station[i][1] 升汽油
         第站i， 有station[i][0] 英里远
         """
-        for i in range(1, n+1):
+        for i in range(1, n + 1):    # 0 为初始
             for j in range(1, i):
-                # 前i-1站加j次，本站不加油
-                # j 就不变
-                if dp[i - 1][j] >= stations[i - 1][0]:
+                if dp[i - 1][j] >= stations[i - 1][0]:    # todo 不懂
+                    # 上一站，本站不加油
                     dp[i][j] = dp[i - 1][j]
-                # 前i-1站加j-1次，本站加油
                 if dp[i - 1][j - 1] >= stations[i - 1][0]:
-                    dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + stations[i - 1][1])
+                    # 前 i-1 站加 j-1 次，本站加油
+                    dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + stations[i - 1][1])  # todo 不懂
         for i in range(n + 1):
             if dp[n][i] >= target:
                 return i
