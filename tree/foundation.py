@@ -47,8 +47,8 @@ class TreeNode:
         """
         queue = [TreeNode]  # 根结点入队
         res = []
-        while len(queue) > 0:
-            # 推出第一个元素
+        while queue:
+            # 推出第一个元素，尾巴加入，推出顶部元素
             node: TreeNode = queue.pop(0)
             res.append(node.val)
             # 把左右结点入队
@@ -57,12 +57,6 @@ class TreeNode:
             if node.right:
                 queue.append(node.right)
         return res
-
-    def maxDepth(self, root):
-        # DFS 求深度
-        if not root:
-            return 0  # 依据不同情况返回不同值
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
 
 class FindDepth:
@@ -114,6 +108,7 @@ class BST(object):
     """
     98. 验证搜索二叉树
     https://leetcode-cn.com/problems/validate-binary-search-tree/
+    定义： left.val < root.val < right.val
     """
     def isValidBST(self, root):
         def is_valid_bst(root, min, max):
@@ -128,6 +123,7 @@ class BST(object):
                 return False
             # 限定左子树的最大值是 root.val，右子树的最小值是 root.val
             return is_valid_bst(root.left, min, root) and is_valid_bst(root.right, root, max)
+        return is_valid_bst(root, None, None)
 
     pre = float('-inf')
     def inorder(self, root):
