@@ -67,17 +67,21 @@ class LRUCache:
             node.value = value
             self.move_to_head(node)
 
+    # 1
     def add_node_to_head(self, node: DlinkedNode):
         # 只考虑头节点的关系
+        # head.next 表示尾节点
         node.prev = self.head
-        node.next = self.head.next  # head.next 表示尾节点
+        node.next = self.head.next
         self.head.next.prev = node
-        self.head.prev = node
+        self.head.next = node
 
+    # 2
     def remove_node(self, node):
         node.prev.next = node.next
         node.next.prev = node.prev
 
+    # 3
     def move_to_head(self, node):
         self.remove_node(node)
         self.add_node_to_head(node)
