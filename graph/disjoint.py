@@ -5,9 +5,8 @@ class UnionFind(object):
     #     self.parent = parent
     #     self.rank = rank
 
-
     def find_root(self, x, parent: []):
-        # 找到根结点
+        # 一层层往上找到根结点
         x_root = x
         while parent[x_root] != -1:
             x_root = parent[x_root]
@@ -19,6 +18,7 @@ class UnionFind(object):
         y_root = self.find_root(y, parent)
 
         if x_root == y_root:
+            # 合并失败
             return 0
         else:
             if rank[x_root] > rank[y_root]:

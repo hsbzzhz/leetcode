@@ -31,3 +31,14 @@ class Solution:
             pre = max(pre + each, each)
             max_res = max(max_res, pre)
         return max_res
+
+    def maxSubArray2(self, nums: List[int]) -> int:
+        dp = [nums[0]]
+        for i in range(1, len(nums)):
+            temp = max(dp[i - 1] + nums[i], nums[i])
+            dp.append(temp)
+        return max(dp)
+
+case = [-2,1,-3,4,-1,2,1,-5,4]
+demo = Solution().maxSubArray2(case)
+print(demo)
