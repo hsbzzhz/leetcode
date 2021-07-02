@@ -120,7 +120,7 @@ class Solution:
 demo = Solution()
 num1 = [1, 3]
 num2 = [2]
-num3 = [1,2,2,2,3,4,8]
+num3 = [1, 2, 2, 2, 3, 4, 8]
 mid = demo.findMedianSortedArrays(num1, num2)
 print(mid)
 # paixu = Sort()

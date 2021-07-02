@@ -9,6 +9,10 @@
 """
 
 
+class ListNode():
+    pass
+
+
 def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
 
     def dfs(l, r, i):
