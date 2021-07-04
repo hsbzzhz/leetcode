@@ -48,3 +48,28 @@ class Solution(object):
                 elif nums[i] + nums[left] + nums[right] < 0:
                     left += 1
         return res
+
+    def threeSum2(self, nums: List[int]) -> List[List[int]]:
+        """
+        对于重复解，把所有答案算出来以后再进行去重处理
+        :param nums:
+        :return:
+        """
+        nums.sort()
+        res = []
+        for i in range(len(nums) - 2):
+            if nums[i] > 0:
+                break
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                temp = nums[i] + nums[l] + nums[r]
+                if temp == 0:
+                    res.append((nums[i], nums[l], nums[r]))
+                    l += 1
+                    r -= 1
+                elif temp < 0:
+                    l += 1
+                elif temp > 0:
+                    r -= 1
+
+        return list(set(res))

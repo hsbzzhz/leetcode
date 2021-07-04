@@ -74,3 +74,18 @@ class Solution(object):
                     high = mid - 1
 
             return strs[0][:low]
+
+
+class Solution3:
+    """
+    取第一个值为sample， 然后采样
+    """
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        str1 = strs[0]
+        for each in strs:
+            while not each.startswith(str1):
+                str1 = str1[:-1]
+
+                if len(str1) == 0:
+                    return ''
+        return str1
