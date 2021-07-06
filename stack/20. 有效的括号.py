@@ -28,9 +28,10 @@ class Solution:
         stack = list()
         for each in s:
             if each in pairs:
-                if not stack or stack[-1] != pairs[each]:
+                if not stack or stack[-1] != pairs[each]:  # 如果同时出现多个，但是 each 不等于当前栈顶元素，这样还不是可以
                     return False
                 stack.pop()  # 默认最后一个元素
             else:
                 stack.append(each)
+        # 结束循环，应该栈会弹空的
         return not stack
