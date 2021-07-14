@@ -22,6 +22,7 @@ class Solution:
             if left == n and right == n:  # 所有括号都上齐的情况
                 ans.append(''.join(track))
                 return
+            # 先放左边的括号，再补右边的括号
             if left < n:  # 左括号没有，就append
                 track.append('(')
                 # left += 1  这样写就错了
@@ -29,7 +30,7 @@ class Solution:
                 track.pop()
             if right < left:  # 左括号有了，append右括号
                 track.append(')')
-                right += 1
+                # right += 1  这样写就错了
                 backtrack(track, left, right + 1)
                 track.pop()
 
