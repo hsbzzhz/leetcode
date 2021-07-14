@@ -12,7 +12,7 @@ class SortDemo1(object):
             return arr
         middle = len(arr) // 2
         left, right = arr[:middle], arr[middle:]
-        # 最后把多个列表合并
+        # SortDemo 是分，merge 是治，所以是先分后治
         return self.merge(self.SortDemo(left), self.SortDemo(right))
 
     def merge(self, left, right):
