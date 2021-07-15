@@ -10,11 +10,35 @@
 
 
 class ListNode():
-    pass
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+def addTwoNumbers_0(self, l1: ListNode, l2: ListNode) -> ListNode:
+    # loop 版
+    dummyHead = ListNode()  # 创建一个结点
+    curr = dummyHead # 创建一个干活结点，不然遍历完了指针就到最后一个结点去了
+    appendix = 0  # 来存sum，初始进化位为0
+    while l1 or l2 or appendix:
+        # 对 l1 l2 appendix 分别处理，就不用考虑链表长度不一的问题
+        if l1:
+            appendix += l1.val
+            l1 = l1.next
+        if l2:
+            appendix += l2.val
+            l2 = l2.next
+
+        curr.next = ListNode(appendix % 10)  # 注意为curr next结点
+        curr = curr.next  # 然后移动curr结点好了
+        appendix = appendix // 10  # 一轮循环后把appendix更新为进位，第二轮循环就可以直接用
+    return dummyHead.next # 最后直接把大哥next 结点 返回
+
+
 
 
 def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-
+    # 递归版，尾递归
     def dfs(l, r, i):
         """
         :param l: l1
