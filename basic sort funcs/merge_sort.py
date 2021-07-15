@@ -32,7 +32,6 @@ class SortDemo1(object):
                 result.append(right.pop(0))
         # 单个list存在元素的情况
         while left:
-            # 单个元素操作起来，效率十分低下
             result.append(left.pop(0))
         while right:
             result.append(right.pop(0))
@@ -48,45 +47,53 @@ if __name__ == '__main__':
 #########################################################################################
 
 
-class SortDemo2(object):
+class Solution:
     """
-    O(nlogn)
-    最坏情况也能保证 O(nlogn)
+    148. 排序链表
+    给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
+    https://leetcode-cn.com/problems/sort-list/
     """
+    def sortList(self, head: ListNode) -> ListNode:
+        def sortFunc(head: ListNode, tail: ListNode) -> ListNode:
+            if not head:
+                return head
+            if head.next == tail:
+                head.next = None
+                return head
+            slow = fast = head
+            while fast != tail and fast.next != tail:
+                slow = slow.next
+                fast = fast.next.next
+            mid = slow
+            return merge(sortFunc(head, mid), sortFunc(mid, tail))
 
-    def mergeSort2(self, nums: [int], l, r):
-        def _merge(nums: [int], l, m, r):
-            # 左右两边排好了序，把左右两边合并
-            res = []
-            p1 = l
-            p2 = m + 1
-            while (p1 < mid) or (p2 < r):
-                if p1 == mid:
-                    res.append(nums[p2])
-                    p2 += 1
-                elif p2 == r:
-                    res.append(nums[p1])
-                    p1 += 1
-                elif nums[p1] < nums[p2]:
-                    res.append(nums[p1])
-                    p1 += 1
+        def merge(head1: ListNode, head2: ListNode) -> ListNode:
+            dummyHead = ListNode(0)
+            temp, temp1, temp2 = dummyHead, head1, head2
+            while temp1 and temp2:
+                if temp1.val <= temp2.val:
+                    temp.next = temp1
+                    temp1 = temp1.next
                 else:
-                    res.append([nums[p2]])
-                    p2 += 1
-            # 深度拷贝
-            for i in range(len(res)):
-                nums[l + i] = res[i]
+                    temp.next = temp2
+                    temp2 = temp2.next
+                temp = temp.next
+            if temp1:
+                temp.next = temp1
+            elif temp2:
+                temp.next = temp2
+            return dummyHead.next
 
-        if l == r:
-            return None
-        mid = (l + r) // 2
-        # 分开
-        self.mergeSort2(nums, l, mid)
-        self.mergeSort2(nums, mid + 1, r)
-        # 合并
-        _merge(nums, l, mid, r)
+        return sortFunc(head, None)
 
 
-res = [2, 9, 3, 6, 4, 1]
-demo = SortDemo2()
-print(demo.mergeSort2(res, 0, len(res)))
+# 作者：LeetCode - Solution
+# 链接：https: // leetcode - cn.com / problems / sort - list / solution / pai - xu - lian - biao - by - leetcode - solution /
+# 来源：力扣（LeetCode）
+# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+# while (fast != tail) {
+#         slow = slow.next;
+#         fast = fast.next;
+#         if (fast != tail) {
+#             fast = fast.next;
+#         }
