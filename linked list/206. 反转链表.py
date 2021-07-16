@@ -12,11 +12,11 @@ class Solution:
         """
         if not head or not head.next:
             return head
-        newhead = self.reverseList(head.next)
+        newHead = self.reverseList(head.next)
         head.next.next = head
         head.next = None
 
-        return newhead
+        return newHead
 
     def reverseList2(self, head: ListNode) -> ListNode:
         """
