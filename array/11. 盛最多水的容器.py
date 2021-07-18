@@ -23,7 +23,7 @@ class Solution:
         l, r = 0, len(height)-1
         ans = 0
         while l < r:
-            area = min(height[i], height[r]) * (r - l)
+            area = min(height[l], height[r]) * (r - l)
             ans = max(ans, area)
             if height[l] <= height[r]:
                 l += 1
