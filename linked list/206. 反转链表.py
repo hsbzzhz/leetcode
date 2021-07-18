@@ -1,3 +1,8 @@
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 class Solution:
     """
     反转一个单链表。
@@ -38,7 +43,7 @@ class Solution:
         著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
         """
         while curr:
-            # 记录当前节点的下一个节点
+            # 记录当前节点的下一个节点, 必须使用一个临时变量
             temp = curr.next
             # 然后将当前节点指向pre
             curr.next = prev
@@ -75,8 +80,8 @@ class Solution2:
             pre = pre.next
         cur = pre.next  # cur就是开始反转的结点
         for _ in range(right - left):
-            next = cur.next  # 记录当前节点的下一个节点
-            cur.next = next.next  # 将当前结点指向下一个结点
-            next.next = pre.next  # 下一个结点再指向前一个结点
-            pre.next = next  #
+            temp = cur.next  # 记录当前节点的下一个节点
+            cur.next = temp.next  # 将当前结点指向下一个结点
+            temp.next = pre.next  # 下一个结点再指向前一个结点
+            pre.next = temp  #
         return dummy_node.next
