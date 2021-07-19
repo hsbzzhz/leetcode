@@ -4,7 +4,7 @@ class Solution(object):
 
     丑数 就是只包含质因数 2、3 和/或 5 的正整数。
 
-     
+
 
     示例 1：
 
@@ -16,6 +16,7 @@ class Solution(object):
     链接：https://leetcode-cn.com/problems/ugly-number-ii
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def nthUglyNumber(self, n):
         """
         因此，如果我们所有丑数的有序序列为 a1,a2,a3,...,an 的话，序列中的每一个数都必然能够被以下三个序列（中的至少一个）覆盖：
@@ -30,15 +31,18 @@ class Solution(object):
         i2, i3, i5 = 1, 1, 1
         index = 2
         while index <= n:
-            a, b, c = dp[i2]*2, dp[i3]*3, dp[i5]*5
+            a, b, c = dp[i2] * 2, dp[i3] * 3, dp[i5] * 5
             temp = min(a, b, c)
-            if temp == a: i2 += 1
-            if temp == b: i3 += 1
-            if temp == c: i5 += 1
+            if temp == a:
+                i2 += 1
+            if temp == b:
+                i3 += 1
+            if temp == c:
+                i5 += 1
             dp.append(temp)
             index += 1
         return dp[-1]
 
+
 res = Solution().nthUglyNumber(10)
 print(res)
-

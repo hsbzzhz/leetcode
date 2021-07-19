@@ -30,8 +30,12 @@ class UF(object):
         """长度为n的并查集"""
 
         self.count = n  # 判断并查集里共有几个集合, 初始化默认互相独立
-        self.parent = [-1 for _ in range(n)]  # 用 parent 数组记录每个节点的父节点，相当于指向父节点的指针，所以 parent 数组内实际存储着一个森林（若干棵多叉树）
-        self.size = [0 for _ in range(n)]  # 用 size 数组记录着每棵树的重量，目的是让 union 后树依然拥有平衡性，而不会退化成链表，影响操作效率
+        self.parent = [
+            -1 for _ in range(n)
+        ]  # 用 parent 数组记录每个节点的父节点，相当于指向父节点的指针，所以 parent 数组内实际存储着一个森林（若干棵多叉树）
+        self.size = [
+            0 for _ in range(n)
+        ]  # 用 size 数组记录着每棵树的重量，目的是让 union 后树依然拥有平衡性，而不会退化成链表，影响操作效率
 
     def union_two_vertices(self, p, q):
         """
@@ -59,7 +63,7 @@ class UF(object):
             # 路径压缩, 也可以省略，最后把自己的父节点指向自己
             parent[x] = parent[parent[x]]
             x = parent[x]
-        return x   # 和入参x不是一个东西
+        return x  # 和入参x不是一个东西
 
     def is_connected(self, p, q):
         # 判断两个结点是不是同一个根节点
@@ -71,9 +75,9 @@ class UF(object):
         return self.count
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     union_find = UnionFind()
-    edges = [[0,1],[1,2],[1,3],[3,4],[2,5]]
+    edges = [[0, 1], [1, 2], [1, 3], [3, 4], [2, 5]]
     vertice_nums = 5
     parent = [-1 for _ in range(vertice_nums)]
     rank = [0 for _ in range(vertice_nums)]
@@ -86,7 +90,6 @@ if __name__ == '__main__':
             print("cycle detected!")
             exit(0)
     print("no cycle found")
-
 
 
 # https://www.cnblogs.com/asdfknjhu/p/12515480.html

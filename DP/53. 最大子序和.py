@@ -39,6 +39,7 @@ class Solution:
             dp.append(temp)
         return max(dp)
 
-case = [-2,1,-3,4,-1,2,1,-5,4]
+
+case = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 demo = Solution().maxSubArray2(case)
 print(demo)

@@ -4,7 +4,7 @@ class Solution(object):
 
     如果不存在公共前缀，返回空字符串 ""。
 
-     
+
 
     示例 1：
 
@@ -21,6 +21,7 @@ class Solution(object):
     链接：https://leetcode-cn.com/problems/longest-common-prefix
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def longestCommonPrefix(self, strs):
         """
         时间复杂度O(mn)
@@ -50,11 +51,11 @@ class Solution(object):
 
         return str1[:index]
 
-
     """
     方法二：二分查找
     O(mnlogm)
     """
+
     class Solution2:
         def longestCommonPrefix(self, strs: List[str]) -> str:
             def isCommonPrefix(length):
@@ -80,6 +81,7 @@ class Solution3:
     """
     取第一个值为sample， 然后采样
     """
+
     def longestCommonPrefix(self, strs: List[str]) -> str:
         str1 = strs[0]
         for each in strs:
@@ -87,5 +89,5 @@ class Solution3:
                 str1 = str1[:-1]
 
                 if len(str1) == 0:
-                    return ''
+                    return ""
         return str1

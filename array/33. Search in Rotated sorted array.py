@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution(object):
     """
     33. 搜索旋转排序数组
@@ -7,13 +8,14 @@ class Solution(object):
 
     请你在数组中搜索 target ，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。
 
- 
+
 
     示例 1：
 
     输入：nums = [4,5,6,7,0,1,2], target = 0
     输出：4
     """
+
     def search(self, nums: List[int], target: int) -> int:
         """
         二分查找法   O(logn)
@@ -31,7 +33,7 @@ class Solution(object):
             if nums[mid] < nums[l]:  # [mid, r] 之间有序
                 if nums[mid] < target <= nums[r]:  # 如果是到在（mid，r] 区间内
                     l = mid + 1
-                else:   # if target < [mid] 或者根本不在区间内
+                else:  # if target < [mid] 或者根本不在区间内
                     r = mid - 1
             elif nums[mid] >= nums[l]:  # [l, mid] 之间有序
                 if nums[l] <= target < nums[mid]:

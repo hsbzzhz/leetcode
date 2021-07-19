@@ -39,8 +39,8 @@ class Solution(object):
         max_sub = ""
         for i in range(size):
             # 存在奇偶情况，都需要算出来再进行长度比较
-            odd, odd_len = self.__center_spread(s, i, i)   # 情况1，单独一个字母作为中心
-            even, even_len = self.__center_spread(s, i, i + 1)   # 情况2， 两个字母作为中心
+            odd, odd_len = self.__center_spread(s, i, i)  # 情况1，单独一个字母作为中心
+            even, even_len = self.__center_spread(s, i, i + 1)  # 情况2， 两个字母作为中心
 
             temp_max_sub = odd if odd_len > even_len else even
             max_sub = temp_max_sub if len(temp_max_sub) > len(max_sub) else max_sub
@@ -57,7 +57,7 @@ class Solution(object):
         while left >= 0 and right < len(s) and s[left] == s[right]:
             left -= 1
             right += 1
-        return s[left + 1: right], right - left - 1
+        return s[left + 1 : right], right - left - 1
 
 
 o = Solution()
@@ -67,6 +67,7 @@ print(ans)
 """
 方法二：动态规划
 """
+
 
 def longestPalindrome(self, s: str) -> str:
     """
@@ -103,6 +104,4 @@ def longestPalindrome(self, s: str) -> str:
                 if cur_len > max_len:
                     max_len = cur_len
                     start = i
-    return s[start:start + max_len]
-
-
+    return s[start : start + max_len]

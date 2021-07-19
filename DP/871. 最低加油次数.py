@@ -43,7 +43,9 @@ from typing import List
 
 
 class Solution:
-    def minRefuelStops(self, target: int, startFuel: int, stations: List[List[int]]) -> int:
+    def minRefuelStops(
+        self, target: int, startFuel: int, stations: List[List[int]]
+    ) -> int:
         # 没加油都能跑到终点，那就一次油都不用加
         if startFuel >= target:
             return 0
@@ -52,20 +54,22 @@ class Solution:
         dp = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
         # dp 长度是 n + 1 的长度是因为把起点视为第0个加油站：起始状态处理
         # 不管经过了几个站，一次油也不加那最多跑的就是startFuel的距离
-        for i in range(n+1):
+        for i in range(n + 1):
             dp[i][0] = startFuel
         """
         第站i， 有station[i][1] 升汽油
         第站i， 有station[i][0] 英里远
         """
-        for i in range(1, n + 1):    # 0 为初始
+        for i in range(1, n + 1):  # 0 为初始
             for j in range(1, i):
-                if dp[i - 1][j] >= stations[i - 1][0]:   # todo 不懂
+                if dp[i - 1][j] >= stations[i - 1][0]:  # todo 不懂
                     # 本站不加油，的前提是不加油的情况可以到油站
                     dp[i][j] = dp[i - 1][j]
                 if dp[i - 1][j - 1] >= stations[i - 1][0]:
                     # 前 i-1 站加 j-1 次，本站加油
-                    dp[i][j] = max(dp[i][j], dp[i - 1][j - 1] + stations[i - 1][1])   # todo 不懂
+                    dp[i][j] = max(
+                        dp[i][j], dp[i - 1][j - 1] + stations[i - 1][1]
+                    )  # todo 不懂
                 # or
                 dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - 1] + stations[i - 1][1])
         for i in range(n + 1):

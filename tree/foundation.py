@@ -93,7 +93,7 @@ class CompareTree(object):
         :type q: TreeNode
         :rtype: bool
         """
-        if p is None and q is None:   # 都为空的话，显然相同
+        if p is None and q is None:  # 都为空的话，显然相同
             return True
         elif p is None or q is None:  # 一个为空，一个非空，显然不同
             return False
@@ -110,6 +110,7 @@ class BST(object):
     https://leetcode-cn.com/problems/validate-binary-search-tree/
     定义： left.val < root.val < right.val
     """
+
     def isValidBST(self, root):
         def is_valid_bst(root, min, max):
             # O(n)
@@ -122,10 +123,14 @@ class BST(object):
             if max and root.val >= max.val:
                 return False
             # 限定左子树的最大值是 root.val，右子树的最小值是 root.val
-            return is_valid_bst(root.left, min, root) and is_valid_bst(root.right, root, max)
+            return is_valid_bst(root.left, min, root) and is_valid_bst(
+                root.right, root, max
+            )
+
         return is_valid_bst(root, None, None)
 
-    pre = float('-inf')
+    pre = float("-inf")
+
     def inorder(self, root):
         """
         闭包实现，
@@ -137,7 +142,8 @@ class BST(object):
         if not root:
             return True
         left = self.inorder(root.left)
-        if root.val <= pre: return False
+        if root.val <= pre:
+            return False
         pre = root.val
         right = self.inorder(root.right)
         return left and right
@@ -200,12 +206,12 @@ class TreeTransfer:
         if not nums:
             return None
         # 找到中点作为根节点
-        mid_idx = len(nums)//2
+        mid_idx = len(nums) // 2
         node = TreeNode(nums[mid_idx])
 
         # 递归构建左右子树
         node.left = self.sortedArrayToBST(nums[:mid_idx])
-        node.right = self.sortedArrayToBST(nums[mid_idx+1:])
+        node.right = self.sortedArrayToBST(nums[mid_idx + 1 :])
 
         return node
 
@@ -234,14 +240,17 @@ class Reserve(object):
     链接：https://leetcode-cn.com/problems/invert-binary-tree
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def invertTree(self, root):
         """
         使用前序遍历
         :type root: TreeNode
         :rtype: TreeNode
         """
-        if root is None: return None
-        if (root.left is None) and (root.right is None): return root
+        if root is None:
+            return None
+        if (root.left is None) and (root.right is None):
+            return root
 
         temp = root.left
         root.left = root.right

@@ -38,7 +38,7 @@ class SortDemo1(object):
         return result
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     srr = [13, 4, 5, 12, 15, 21, 16, 23, 89]
     demo = SortDemo1()
     res = demo.SortDemo(srr)
@@ -53,6 +53,7 @@ class Solution:
     给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
     https://leetcode-cn.com/problems/sort-list/
     """
+
     def sortList(self, head: ListNode) -> ListNode:
         def sortFunc(head: ListNode, tail: ListNode) -> ListNode:
             if not head:

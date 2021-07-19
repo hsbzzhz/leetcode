@@ -13,6 +13,7 @@ class Solution:
     链接：https://leetcode-cn.com/problems/container-with-most-water
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def maxArea(self, height: List[int]) -> int:
         """
         双指针，左右两端遍历
@@ -20,7 +21,7 @@ class Solution:
         :param height:
         :return:
         """
-        l, r = 0, len(height)-1
+        l, r = 0, len(height) - 1
         ans = 0
         while l < r:
             area = min(height[l], height[r]) * (r - l)

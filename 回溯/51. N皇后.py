@@ -19,7 +19,8 @@ class Solution:
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
     """
-    def is_valid(self, board, row, col) -> bool:   # 减枝
+
+    def is_valid(self, board, row, col) -> bool:  # 减枝
         # 检查列中是否有皇后冲突
         for i in range(row):  # r:0->row-1
             if board[i][col] == "Q":
@@ -48,6 +49,7 @@ class Solution:
         :param n:
         :return:
         """
+
         def backtrack(board: [], row):
             # 对每一行进行验证
             if row == n:

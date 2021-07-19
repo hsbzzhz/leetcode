@@ -1,9 +1,12 @@
 import List
-class SegmentTree():
+
+
+class SegmentTree:
     """
     线段树
     https://www.bilibili.com/video/BV1cb411t7AM?t=386
     """
+
     def build_tree(self, arr: list, tree: list, node, start, end):
         """
 
@@ -17,11 +20,11 @@ class SegmentTree():
         if start == end:
             tree[node] = arr[start]  # 递归出口，到了树的底部
         else:
-            mid = (start + end)//2  # 根据范围求得根节点index
-            left_node = node*2 +1
-            right_node = node*2 +2
+            mid = (start + end) // 2  # 根据范围求得根节点index
+            left_node = node * 2 + 1
+            right_node = node * 2 + 2
             self.build_tree(arr, tree, left_node, start, mid)
-            self.build_tree(arr, tree, right_node, mid+1, end)
+            self.build_tree(arr, tree, right_node, mid + 1, end)
             tree[node] = tree[left_node] + tree[right_node]
 
     def update_tree(self, arr: list, tree: list, node, start, end, idx, val):
@@ -40,13 +43,13 @@ class SegmentTree():
             arr[idx] = val
             tree[node] = val
         else:
-            mid = (start + end)//2
-            left_node = node*2 + 1
-            right_node = node*2 + 2
-            if start <= idx<= mid:
+            mid = (start + end) // 2
+            left_node = node * 2 + 1
+            right_node = node * 2 + 2
+            if start <= idx <= mid:
                 self.update_tree(arr, tree, left_node, start, mid, idx, val)
             elif idx > mid:
-                self.update_tree(arr, tree, right_node, mid+1, end, idx, val)
+                self.update_tree(arr, tree, right_node, mid + 1, end, idx, val)
             tree[node] = tree[left_node] + tree[right_node]
 
     def query_tree(self, arr: list, tree: list, node, start, end, range_l, range_r):
@@ -57,11 +60,14 @@ class SegmentTree():
         elif start == end:
             return tree[node]
         else:
-            mid = (start + end) //2
-            left_node = 2*node +1
-            right_node = 2*node +2
-            sum_left = self.query_tree(arr, tree, left_node, start, mid, range_l, range_r)
-            sum_right = self.query_tree(arr, tree, right_node, mid + 1, end, range_l, range_r)
+            mid = (start + end) // 2
+            left_node = 2 * node + 1
+            right_node = 2 * node + 2
+            sum_left = self.query_tree(
+                arr, tree, left_node, start, mid, range_l, range_r
+            )
+            sum_right = self.query_tree(
+                arr, tree, right_node, mid + 1, end, range_l, range_r
+            )
 
             return sum_left + sum_right
-

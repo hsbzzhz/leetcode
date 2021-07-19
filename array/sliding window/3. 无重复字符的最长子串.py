@@ -30,16 +30,18 @@
 
 """
 
+
 # 滑动窗口模板
 def _sliding_window_template(self, s, t):  # s for string, t for target
     left, right = 0, 0
     while right < len(s):
-        'window'.add(s[right])
+        "window".add(s[right])
         right += 1
-        while t in 'window':
+        while t in "window":
             # 如果窗口包含了所有目标元素，可以缩小范围了
-            'window'.pop(s[left])
+            "window".pop(s[left])
             left += 1
+
 
 class Solution:
     """
@@ -48,6 +50,7 @@ class Solution:
 
     def lengthOfLongestSubstring(self, s: str) -> int:
         """
+        ~看这个
         思路：
         1， 所有元素必须遍历一次
         2. 什么时候重新计算count，也就是重新计算i的位置
@@ -65,7 +68,7 @@ class Solution:
                 visited[char_r] = 1
             else:
                 visited[char_r] += 1
-            right +=1
+            right += 1
             # 开始滑动窗口
             while visited[char_r] > 1:
                 char_l = s[left]
@@ -81,14 +84,14 @@ class Solution:
         :type s: str
         :rtype: int
         """
-        visited = ''
+        visited = ""
         count = 0
         for char in s:
             if char not in visited:
                 visited += char
                 count = max(count, len(visited))
             else:
-                visited = visited[visited.index(char) + 1:] + char
+                visited = visited[visited.index(char) + 1 :] + char
         return count
 
     def lengthOfLongestSubstring3(self, s: str) -> int:

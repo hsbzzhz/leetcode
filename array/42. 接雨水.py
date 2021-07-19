@@ -1,4 +1,5 @@
 from typing import List
+
 """
 42. 接雨水
 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
@@ -15,6 +16,7 @@ from typing import List
 https://leetcode-cn.com/problems/trapping-rain-water/
 """
 
+
 class Solution:
     def trap0(self, height: List[int]) -> int:
         """
@@ -25,14 +27,14 @@ class Solution:
         max_index = height.index(max(height))
         res = 0
         for left in range(0, max_index):
-            for i in range(left+1, max_index):
+            for i in range(left + 1, max_index):
                 if height[i] < height[left]:
                     res += height[left] - height[i]
                 else:
                     left = i
 
-        for right in range(len(height)-1, max_index, -1):
-            for j in range(right-1, max_index, -1):
+        for right in range(len(height) - 1, max_index, -1):
+            for j in range(right - 1, max_index, -1):
                 if height[j] < height[right]:
                     res += height[right] - height[j]
                 else:
@@ -46,7 +48,7 @@ class Solution:
         :return:
         """
         ans = 0
-        for i in range(1, len(height)-1):
+        for i in range(1, len(height) - 1):
             max_left, max_right = 0, 0
             # 寻找左边最高
             left, right = i, i
@@ -67,7 +69,7 @@ class Solution:
         :return:
         """
         left, left_max = 0, 0
-        right, right_max = len(height)-1, 0
+        right, right_max = len(height) - 1, 0
         sum = 0
         while left < right:
             left_max = max(left_max, height[left])

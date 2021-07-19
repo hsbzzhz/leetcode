@@ -24,6 +24,5 @@ class Solution:
         for i in range(len(nums)):
             for j in range(i):  # 对 每个 i 都从头进行计算，
                 if nums[j] < nums[i]:
-                    dp[i] = max(dp[i], dp[j] + 1) # 在0，i范围中求得最大数， 复杂！
+                    dp[i] = max(dp[i], dp[j] + 1)  # 在0，i范围中求得最大数， 复杂！
         return max(dp)
-

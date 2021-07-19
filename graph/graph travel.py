@@ -1,6 +1,5 @@
 class Solution:
-    """
-    """
+    """ """
 
     def bfs(self, graph: [], start):
         queue = list()
@@ -88,7 +87,7 @@ graph = {
     "C": ["A", "B", "D", "E"],
     "D": ["B", "C", "E", "F"],
     "E": ["C", "D"],
-    "F": ["D"]
+    "F": ["D"],
 }
 
 graph1 = {
@@ -97,7 +96,7 @@ graph1 = {
     "C": ["B", "D"],
     "D": ["C", "F"],
     "E": ["A", "B"],
-    "F": ["D"]
+    "F": ["D"],
 }
 
 # demo.dfs(graph, 'A')

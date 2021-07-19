@@ -24,7 +24,10 @@ class Solution:
     (4)  当 right 为空 ，left 不为空 ：p,q 都不在 root 的右子树中，直接返回 left; (其中有两种情况)
 
     """
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+
+    def lowestCommonAncestor(
+        self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
+    ) -> "TreeNode":
         """
         O(n)
         :param root:
@@ -33,7 +36,7 @@ class Solution:
         :return:
         """
         # baseline
-        if not root:   # 当越过叶节点，则直接返回 null
+        if not root:  # 当越过叶节点，则直接返回 null
             return None
         # 为什么说找到一个就可以
         # 因为:
@@ -48,9 +51,9 @@ class Solution:
         # 如果存在一个，则返回存在的一个
         if not left and not right:  # case 1
             return None
-        if left and right:    # case 2
+        if left and right:  # case 2
             return root
-        if not left:   # case 3
+        if not left:  # case 3
             return right
         if not right:  # case 4
             return left

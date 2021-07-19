@@ -2,15 +2,16 @@ class Solution:
     """
     time O(n), space O(1)
     """
+
     def myAtoi(self, str: str) -> int:
         str = str.strip()
         if len(str) < 1:
             return 0
         # 开头有符号，字母，数字的情况
-        if str[0] == '-':
+        if str[0] == "-":
             flag = -1
             str = str[1:]
-        elif str[0] == '+':
+        elif str[0] == "+":
             flag = 1
             str = str[1:]
         elif str[0].isdigit():
@@ -25,12 +26,12 @@ class Solution:
                 break
         if len(res) > 0:
             # 防止只有一个数字的情况
-            x = int(''.join(res))
+            x = int("".join(res))
         else:
             return 0
         x = x * flag
-        if x < -2 ** 31:
-            return -2 ** 31
+        if x < -(2 ** 31):
+            return -(2 ** 31)
         elif x > 2 ** 31 - 1:
             return 2 ** 31 - 1
         else:
@@ -56,8 +57,9 @@ class Solution:
 class Solution2:
     def myAtoi(self, str: str) -> int:
         import re
+
         str = str.strip()
-        matches = re.match('*([+-]?\d+)', str)  # 最重要的就是这一句了吧，正则重在搞定匹配的pattern
+        matches = re.match("*([+-]?\d+)", str)  # 最重要的就是这一句了吧，正则重在搞定匹配的pattern
         if matches:
             res = int(matches.group(1))
             if res > (MAX := 2 ** 31 - 1):
@@ -65,12 +67,13 @@ class Solution2:
                 海象表达式： 在变量使用的时候赋值
                 """
                 return MAX
-            elif res < (MIN := -2 ** 31):
+            elif res < (MIN := -(2 ** 31)):
                 return MIN
             else:
                 return res
         else:
             return 0
+
 
 """作者：LotusPanda
 链接：https://leetcode-cn.com/problems/string-to-integer-atoi/solution/xiong-mao-shua-ti-python3-yi-qi-xue-xi-zheng-ze-bi/

@@ -41,7 +41,8 @@ class Solution:
         """
         res = list()
         candidates.sort()
-        def backtrace(candidates:[] ,path: [int], start: int, target: int):
+
+        def backtrace(candidates: [], path: [int], start: int, target: int):
             """
 
             :param candidates:
@@ -59,8 +60,10 @@ class Solution:
                     path.append(candidates[i])
                     backtrace(candidates, path, i, target - candidates[i])
                     path.pop(-1)
+
         backtrace(candidates, [], 0, target)
         return res
+
 
 s = Solution()
 nums = [2, 3, 6, 7]

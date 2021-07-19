@@ -58,23 +58,22 @@ class Solution(object):
         if len(nums) <= 1:
             return
         i = len(nums) - 2
-        while i >= 0 and nums[i] >= nums[i+1]:
+        while i >= 0 and nums[i] >= nums[i + 1]:
             i -= 1
 
         targert_index = 0
-        for i in range(len(nums)-2, -1, -1):
-            if nums[i] < nums[i+1]:
+        for i in range(len(nums) - 2, -1, -1):
+            if nums[i] < nums[i + 1]:
                 targert_index = i
                 break
-        nums[targert_index+1:].sort()
-        for i in range(targert_index+1, len(nums)):
+        nums[targert_index + 1 :].sort()
+        for i in range(targert_index + 1, len(nums)):
             if nums[targert_index] < nums[i]:
                 nums[targert_index], nums[i] = nums[i], nums[targert_index]
         return nums
 
 
-
-nums = [1,2,3,8,5,7,6,4]
+nums = [1, 2, 3, 8, 5, 7, 6, 4]
 # demo = Solution()
 # res = demo.nextPermutation(nums)
 # print(res)

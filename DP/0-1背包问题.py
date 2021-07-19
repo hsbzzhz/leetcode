@@ -15,27 +15,9 @@ def backpack(itemWeight, currentWeight):
     itemValue = 0
     if itemWeight > currentWeight:
         # 背包容量不够了，不能装入背包
-        table[row][col] = table[row-1][col]
+        table[row][col] = table[row - 1][col]
     else:
         # 选择装入背包或者不装入
-        table[row][col] = max(table[row - 1][col], table[row-1][currentWeight - itemWeight] + itemValue)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        table[row][col] = max(
+            table[row - 1][col], table[row - 1][currentWeight - itemWeight] + itemValue
+        )

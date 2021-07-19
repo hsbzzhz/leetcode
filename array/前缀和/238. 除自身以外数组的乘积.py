@@ -21,15 +21,16 @@
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 """
 
+
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         prev_sum = [1]
         for each in nums[:-1]:
-            prev_sum.append(prev_sum[-1]*each)
+            prev_sum.append(prev_sum[-1] * each)
         succ_sum = [1]
         for each in nums[1:][::-1]:
-            succ_sum.append(succ_sum[-1]*each)
+            succ_sum.append(succ_sum[-1] * each)
         ans = []
         for i in range(len(nums)):
-            ans.append(prev_sum[i]*succ_sum[-(i+1)])
+            ans.append(prev_sum[i] * succ_sum[-(i + 1)])
         return ans

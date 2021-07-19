@@ -38,9 +38,13 @@ class Solution(object):
                     left += 1
                     right -= 1
                     # 判断左界和右界是否和下一位置重复，去除重复解。并同时将 L,R 移到下一位置，寻找新的解
-                    while left < right and nums[right] == nums[right + 1]:   # 跳过重复的, right的上一位是 right + 1
+                    while (
+                        left < right and nums[right] == nums[right + 1]
+                    ):  # 跳过重复的, right的上一位是 right + 1
                         right -= 1
-                    while left < right and nums[left] == nums[left - 1]:   # 跳过重复的， left 的上一位是 left - 1
+                    while (
+                        left < right and nums[left] == nums[left - 1]
+                    ):  # 跳过重复的， left 的上一位是 left - 1
                         left += 1
 
                 elif nums[i] + nums[left] + nums[right] > 0:

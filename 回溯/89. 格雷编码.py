@@ -5,6 +5,7 @@ class solution:
     """
     非 typical 回溯，太tricky 搞死人
     """
+
     def grayCode(self, n: int) -> List[int]:
         nums = [0, 1]
         output = []
@@ -26,4 +27,3 @@ class solution:
 
         dfs(nums, [], n, 0)
         return output
-

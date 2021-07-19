@@ -6,9 +6,9 @@ class Sort(object):
         :param target:
         :return:
         """
-        low, high = 0, len(lst) - 1   # 注意
+        low, high = 0, len(lst) - 1  # 注意
         while low <= high:
-            mid = low + (high - low)//2
+            mid = low + (high - low) // 2
             if lst[mid] == target:
                 return mid
             elif lst[mid] > target:
@@ -30,7 +30,7 @@ class Sort(object):
         if left > right:
             # 递归出口
             return None
-        mid = (left+right)//2
+        mid = (left + right) // 2
         if lst[mid] == target:
             return mid
         elif lst[mid] > target:
@@ -45,7 +45,7 @@ class Sort(object):
         left, right = 0, len(lst) - 1
         while left <= right:
             # 循环返回条件是 left == right, 但是找到target会一直往左边缩进，直至两个指针指向同一个元素
-            mid = (left + right)//2
+            mid = (left + right) // 2
             if lst[mid] == target:
                 # 收缩右侧边界，
                 right = mid - 1
@@ -55,14 +55,16 @@ class Sort(object):
                 right = mid - 1
 
         # 检查left边界以及没有找到的情况
-        if left >= len(lst) or lst[left] != target:  # 只判断了有没有出右边界，因为 index是从0开始，难道还能index为负数?
+        if (
+            left >= len(lst) or lst[left] != target
+        ):  # 只判断了有没有出右边界，因为 index是从0开始，难道还能index为负数?
             return -1
         return left
 
-    def binary_right_bound(self, lst:[], target):
+    def binary_right_bound(self, lst: [], target):
         left, right = 0, len(lst) - 1
         while left <= right:
-            mid = (left + right)//2
+            mid = (left + right) // 2
             if lst[mid] == target:
                 # 收缩左边界
                 left = mid + 1
@@ -85,6 +87,7 @@ class Solution:
         :type nums2: List[int]
         :rtype: float
         """
+
         def find_target_by_index(index):
             """
             根据index，在两个排序中的列表中寻找元素
@@ -93,7 +96,7 @@ class Solution:
             """
             res = 0, 0
             p1, p2 = 0, 0  # 两个列表中，各放置一个指针
-            while p1+p2 < index:
+            while p1 + p2 < index:
                 if p1 >= len(nums1):
                     res = nums2[p2]
                     p2 += 1
@@ -111,9 +114,9 @@ class Solution:
         sum_index = len(nums1) + len(nums2)
         i = sum_index // 2
         if sum_index % 2 == 0:
-            res = (find_target_by_index(i)+find_target_by_index(i+1))/2
+            res = (find_target_by_index(i) + find_target_by_index(i + 1)) / 2
         else:
-            res = find_target_by_index(i+1)
+            res = find_target_by_index(i + 1)
         return res
 
 

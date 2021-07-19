@@ -43,11 +43,11 @@ class Solution:
             if len(track) == len(digits):
                 res.append(track)  # "ad"
                 return  # 必须加这一步，否则指针溢出
-            for word in phone[digits[index]]:   # ["a", "b", "c"]
-                track += word   # "ad"
+            for word in phone[digits[index]]:  # ["a", "b", "c"]
+                track += word  # "ad"
                 dfs(track, index + 1)  # ["d", "e", "f"]
                 track = track[:-1]  # 移除尾部字符，还原
 
         res = []
-        dfs('', 0)
+        dfs("", 0)
         return res

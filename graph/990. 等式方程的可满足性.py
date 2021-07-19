@@ -31,7 +31,9 @@ class Solution:
             # 这个循环把所有相等的等连起来，构建图
             if st[1] == "=":
                 index1 = ord(st[0]) - ord("a")  # ord用于获取 ASCII 的值
-                index2 = ord(st[3]) - ord("a")  # 为什么要减 ord('a')，因为数组范围是26，acii 减去一个a才不会数组越界
+                index2 = ord(st[3]) - ord(
+                    "a"
+                )  # 为什么要减 ord('a')，因为数组范围是26，acii 减去一个a才不会数组越界
                 uf.union(index1, index2)
         for st in equations:
             # 判断不等式中，有没有相等
@@ -41,6 +43,7 @@ class Solution:
                 if uf.find(index1) == uf.find(index2):
                     return False
         return True
+
 
 """
 https://leetcode-cn.com/problems/satisfiability-of-equality-equations/solution/deng-shi-fang-cheng-de-ke-man-zu-xing-by-leetcode-/

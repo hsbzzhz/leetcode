@@ -1,4 +1,3 @@
-
 class Solution(object):
     # 给定不同面额的硬币 coins 和一个总金额 amount。
     # 编写一个函数来计算可以凑成总金额所需的最少的硬币个数。如果没有任何一种硬币组合能组成总金额，返回 -1。
@@ -17,15 +16,19 @@ class Solution(object):
         :param amount:
         :return:
         """
+
         def dp(n):
-            if n == 0: return 0
-            if n < 0: return -1
-            res = float('INF')
+            if n == 0:
+                return 0
+            if n < 0:
+                return -1
+            res = float("INF")
             for each in coins:
                 prev = dp(n - each)
-                if prev == -1: continue
+                if prev == -1:
+                    continue
                 res = min(res, 1 + prev)
-            return res if res != float('INF') else -1
+            return res if res != float("INF") else -1
 
         return dp(amount)
 
@@ -40,21 +43,27 @@ class Solution(object):
         :return:
         """
         memo = dict()
+
         def dp(n):
             # 查备忘录，避免重复计算
-            if n in memo: return memo[n]
+            if n in memo:
+                return memo[n]
             # base case
-            if n == 0: return 0
-            if n < 0: return -1
-            res = float('INF')  # 初始化一个正无穷
+            if n == 0:
+                return 0
+            if n < 0:
+                return -1
+            res = float("INF")  # 初始化一个正无穷
             for coin in coins:
                 prev = dp(n - coin)
-                if prev == -1: continue  # 跳过无解的case
-                res = min(res, 1+prev)
+                if prev == -1:
+                    continue  # 跳过无解的case
+                res = min(res, 1 + prev)
 
             # 更新备忘录
-            memo[n] = res if res != float('INF') else -1
+            memo[n] = res if res != float("INF") else -1
             return memo[n]
+
         return dp(amount)
 
     def coinChange3(self, coins, amount):
@@ -67,13 +76,13 @@ class Solution(object):
         :param amount:
         :return:
         """
-        dp = [float('inf')] * (amount + 1)
+        dp = [float("inf")] * (amount + 1)
         dp[0] = 0
         # 遍历 dp table
         for i in range(len(dp)):
             for coin in coins:
                 # 子问题无解的情况，跳过
-                if i - coin < 0: continue
+                if i - coin < 0:
+                    continue
                 dp[i] = min(dp[i], 1 + dp[i - coin])
-        return dp[amount] if dp[amount] != float('inf') else -1
-
+        return dp[amount] if dp[amount] != float("inf") else -1

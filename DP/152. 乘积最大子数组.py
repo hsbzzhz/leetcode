@@ -4,12 +4,16 @@ from typing import List
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
 
-        max_res = [nums[0]]*(len(nums))
-        min_res = [nums[0]]*(len(nums))
+        max_res = [nums[0]] * (len(nums))
+        min_res = [nums[0]] * (len(nums))
 
         for i in range(1, len(nums)):
-            max_res[i] = max(max_res[i-1]*nums[i], min_res[i-1]*nums[i], nums[i])
-            min_res[i] = min(max_res[i-1]*nums[i], min_res[i-1]*nums[i], nums[i])
+            max_res[i] = max(
+                max_res[i - 1] * nums[i], min_res[i - 1] * nums[i], nums[i]
+            )
+            min_res[i] = min(
+                max_res[i - 1] * nums[i], min_res[i - 1] * nums[i], nums[i]
+            )
 
         ans = nums[0]
         for i in range(1, len(nums)):
