@@ -22,7 +22,7 @@ class Solution:
             return 0
         dp = [1] * len(nums)  # dp 存每个位置的最长连续序列
         for i in range(len(nums)):
-            for j in range(i):  # 对 每个 i 都从头进行计算，
+            for j in range(i):  # 对 每个 i 都从头进行计算，range(0, i)
                 if nums[j] < nums[i]:
-                    dp[i] = max(dp[i], dp[j] + 1)  # 在0，i范围中求得最大数， 复杂！
+                    dp[i] = max(dp[i], dp[j] + 1)  # 初始值为1，dp[j]+1, 下次大于就继续覆盖
         return max(dp)

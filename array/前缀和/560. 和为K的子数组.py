@@ -35,3 +35,11 @@ class Solution:
     def subarraySum1(self, nums: List[int], k: int) -> int:
         # 利用字典，优化至O(n)
         pass
+
+
+"""
+解释：
+nums:      [3, 5, 2, -1, 4, 1]
+preSum: [0, 3, 8, 10, 8, 12, 13]
+
+"""

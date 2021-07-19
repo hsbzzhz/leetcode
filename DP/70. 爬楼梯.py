@@ -33,7 +33,7 @@ def climbStairs(n):
     return dp[n]
 
 
-# 递归方法二
+# 方法二: 递归
 class Solution(object):
     def climbStairs2(self, n):
         if n == 0 or n == 1:
