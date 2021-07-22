@@ -16,8 +16,8 @@ class ListNode:
 
 
 def addTwoNumbers_0(self, l1: ListNode, l2: ListNode) -> ListNode:
-    # loop 版
-    dummyHead = ListNode()  # 创建一个结点
+    # loop 版， 看这个
+    dummyHead = ListNode(None)  # 创建一个结点
     curr = dummyHead  # 创建一个干活结点，不然遍历完了指针就到最后一个结点去了
     appendix = 0  # 来存sum，初始进化位为0
     while l1 or l2 or appendix:
