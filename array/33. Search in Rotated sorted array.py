@@ -29,8 +29,8 @@ class Solution(object):
             mid = (l + r) // 2
             if nums[mid] == target:
                 return mid
-            # 绝无可能 == mid
-            if nums[mid] < nums[l]:  # [mid, r] 之间有序
+            # 只跟 [l] 做比较！
+            if nums[mid] < nums[l]:  # 绝无可能 == mid， [mid, r] 之间有序
                 if nums[mid] < target <= nums[r]:  # 如果是到在（mid，r] 区间内
                     l = mid + 1
                 else:  # if target < [mid] 或者根本不在区间内
