@@ -43,30 +43,29 @@ class heapSort:
             # 对该结点子树进行堆化操作, 为了寻找子节点中可能存在最大的数
             self.heapify(tree, n, max_index)
 
-    def build_heap(self, tree: [], n: int):
+    def build_heap(self, tree: [], heap_size: int):
         """
         构造一个堆，将堆中所有数据重新排序
 
         时间复杂度 O(nlgn)
         从最后一个结点的父结点依次向上调用堆化，即可完成
         :param tree:
-        :param n: 总共结点个数
+        :param heap_size: 总共结点个数
         :return:
         """
-        last_node = n - 1
-        last_parent = (last_node - 1) // 2
+        last_parent = (heap_size - 1) // 2
         while last_parent >= 0:
             # 对遍历过程的每一个非叶子结点，将以其为根的子树维护成大顶堆
             # 最终整个树都满足大顶堆的性质
-            self.heapify(tree, n, last_parent)
+            self.heapify(tree, heap_size, last_parent)
             last_parent -= 1
 
-    def heap_sort(self, tree: [], n):
+    def heap_sort(self, tree: [], heap_size: int):
         # O(nlgn)
         # 构造大根堆
         # 将根结点取出与最后一位做对调，对前面 len-1 个结点进行调整
-        self.build_heap(tree, n)
-        i = n - 1
+        self.build_heap(tree, heap_size)
+        i = heap_size - 1
         while i >= 0:
             # 将遍历到的元素与最后一个堆的元素交换,
             tree[i], tree[0] = tree[0], tree[i]
@@ -75,12 +74,12 @@ class heapSort:
             i -= 1
 
 
-tree = [2, 4, 5, 1, 17, 3, 7]
+tree = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
 heapsort = heapSort()
 heapsort.heapify(tree, len(tree), 0)
-# print(tree)
+print(tree)
 heapsort.build_heap(tree, len(tree))
-# print(tree)
+print(tree)
 heapsort.heap_sort(tree, len(tree))
 print(tree)
 
