@@ -73,7 +73,7 @@ class FindDepth:
         :return:
         """
         if not root:
-            return 0
+            return 0  # 必须要是0， 应该要参与max运算
         return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 

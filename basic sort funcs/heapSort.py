@@ -23,7 +23,7 @@ class heapSort:
         时间复杂度 O(h), h为堆的高度
         :param tree: 待排数组
         :param n: 树中结点个数
-        :param i: 对哪个结点开始至树的结尾做操作，倒数第二层
+        :param i: last_parent: 对哪个结点开始至树的结尾做操作，倒数第二层
         :return:
         """
         # 跳出递归条件
@@ -31,7 +31,8 @@ class heapSort:
         #     return
         c1 = 2 * i + 1
         c2 = 2 * i + 2
-        # 确保子结点不出界
+        # 确保子结点不出界, 和子节点对比，将大的结点序号放在父节点
+        # 需要一个中间值来传递节点序号
         max_index = i
         if c1 < n and tree[c1] > tree[max_index]:
             max_index = c1
@@ -77,9 +78,9 @@ class heapSort:
 tree = [2, 4, 5, 1, 17, 3, 7]
 heapsort = heapSort()
 heapsort.heapify(tree, len(tree), 0)
-print(tree)
+# print(tree)
 heapsort.build_heap(tree, len(tree))
-print(tree)
+# print(tree)
 heapsort.heap_sort(tree, len(tree))
 print(tree)
 
@@ -101,7 +102,10 @@ def findKthLargest(self, nums: List[int], k: int) -> int:
     n = len(nums)
     self.build_heap(nums, n)
     for i in range(k - 1):
+        # 堆顶元素 nums[0] 是最大的元素，将它扔到 nums 尾部去
         nums[n - 1], nums[0] = nums[0], nums[n - 1]
+        # 然后默认计算范围缩小 1
         n -= 1
+        # 这样一顿操作，那就把最大值放在了 nums[0] 堆顶了
         self.heapify(nums, n, 0)
     return nums[0]
