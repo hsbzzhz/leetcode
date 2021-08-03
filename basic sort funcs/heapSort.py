@@ -34,9 +34,9 @@ class heapSort:
         # 确保子结点不出界, 和子节点对比，将大的结点序号放在父节点
         # 需要一个中间值来传递节点序号
         max_index = i
-        if c1 < n and tree[c1] > tree[max_index]:
+        if c1 < n and tree[c1] > tree[max_index]:  # 如果改成 < 号，那就生成一个最小堆，从大到小排序了 (1.)
             max_index = c1
-        if c2 < n and tree[c2] > tree[max_index]:
+        if c2 < n and tree[c2] > tree[max_index]:  # 如果改成 > 号，那就生成一个最小堆，从大到小排序了 (2.)
             max_index = c2
         if max_index != i:
             tree[i], tree[max_index] = tree[max_index], tree[i]
