@@ -37,6 +37,6 @@ def removeDuplicates(self, nums):
         # 前后相同，就继续遍历直到快慢指针指向不同的数
         if nums[fast] != nums[slow]:
             # 如果前后不同，有效数字加一并且把快指针的有效数值赋值给慢指针的下一位，这样就越过了中间的重复项
-            slow += 1
+            slow += 1  # 这个步骤要在赋值之前
             nums[slow] = nums[fast]
     return slow + 1

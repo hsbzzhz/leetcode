@@ -11,13 +11,13 @@ class TreeNode:
     三种遍历方法
     """
 
-    def preoder(self, TreeNode):
+    def preorder(self, TreeNode):
         # 前序遍历: 根 - 左 - 右
         if TreeNode is None:
             return
         print(TreeNode.val)
-        self.preoder(TreeNode.left)
-        self.preoder(TreeNode.right)
+        self.preorder(TreeNode.left)
+        self.preorder(TreeNode.right)
 
     def inorder(self, TreeNode):
         # 中序遍历：左 - 根 - 右
