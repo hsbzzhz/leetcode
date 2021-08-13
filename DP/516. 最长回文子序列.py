@@ -39,3 +39,5 @@ class Solution:
 
 longp = Solution()
 longp.longestPalindromeSubseq("bbbab")
+
+# ref. https://github.com/labuladong/fucking-algorithm/blob/master/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98%E6%A8%A1%E6%9D%BF.md
