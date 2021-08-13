@@ -16,10 +16,9 @@ def solution(A):
         # 从后往前赋值, 上一个数字加现在这个数字
         post_max[j] = max(fore_max[j + 1] + A[j], 0)
 
+    print(fore_max)
+    print(post_max)
     max_value = 0
     for i in range(1, len(A) - 1):
         max_value = max(max_value, fore_max[i - 1] + post_max[i + 1])
     return max_value
-
-
-print(solution(A))
