@@ -40,7 +40,6 @@ class Stock(object):
         O(n) O(1)
         122. 买卖股票的最佳时机 II
         允许多次买卖
-        如果有把卖出价格，那此方法不可行
         :param self:
         :param prices:
         :return:

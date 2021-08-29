@@ -11,13 +11,13 @@ class TreeNode:
     三种遍历方法
     """
 
-    def preoder(self, TreeNode):
+    def preorder(self, TreeNode):
         # 前序遍历: 根 - 左 - 右
         if TreeNode is None:
             return
         print(TreeNode.val)
-        self.preoder(TreeNode.left)
-        self.preoder(TreeNode.right)
+        self.preorder(TreeNode.left)
+        self.preorder(TreeNode.right)
 
     def inorder(self, TreeNode):
         # 中序遍历：左 - 根 - 右
@@ -73,7 +73,7 @@ class FindDepth:
         :return:
         """
         if not root:
-            return 0
+            return 0  # 必须要是0， 应该要参与max运算
         return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 
