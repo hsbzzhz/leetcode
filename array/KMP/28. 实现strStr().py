@@ -24,12 +24,14 @@ class Solution:
     链接：https://leetcode-cn.com/problems/implement-strstr
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
     """
+
     def strStr(self, haystack: str, needle: str) -> int:
-        if len(needle) == 0: return 0
-        for i in range(len(haystack)-len(needle)+1):
+        if len(needle) == 0:
+            return 0
+        for i in range(len(haystack) - len(needle) + 1):
             for j in range(len(needle)):
-                if haystack[i+j] != needle[j]:
+                if haystack[i + j] != needle[j]:
                     break
-                if j == len(needle)-1:
+                if j == len(needle) - 1:
                     return i
         return -1

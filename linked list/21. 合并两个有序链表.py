@@ -35,3 +35,25 @@ class Solution:
 
 
 # ref. https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/yi-kan-jiu-hui-yi-xie-jiu-fei-xiang-jie-di-gui-by-/
+
+    def mergeTwoLists2(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummyHead = ListNode(0) # 用一个dummy节点来
+        cur = dummyHead # 记住！需要另外用一个指针来处理
+
+        while l1 and l2:
+            if l1.val < l2.val:
+                cur.next = l1
+                l1 = l1.next
+            else:
+                cur.next = l2
+                l2 = l2.next
+            cur = cur.next
+        while l1:
+            cur.next = l1
+            l1 = l1.next
+            cur = cur.next
+        while l2:
+            cur.next = l2
+            l2 = l2.next
+            cur = cur.next
+        return dummyHead.next

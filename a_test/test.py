@@ -6,6 +6,7 @@ A = [3, 2, 6, -1, 4, 5, -1, 2]
 # should be 17
 # https://blog.csdn.net/aejt95023/article/details/101512852
 
+
 def solution(A):
     fore_max = [0] * len(A)
     post_max = [0] * len(A)

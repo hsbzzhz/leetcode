@@ -21,6 +21,8 @@
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 """
+
+
 class Solution:
     def longestPalindromeSubseq(self, s: str) -> int:
         dp = [[0] * len(s) for _ in range(len(s))]
@@ -29,12 +31,13 @@ class Solution:
         for r in range(len(s) - 1, -1, -1):  # 这个遍历顺序很迷
             for l in range(r + 1, len(s)):
                 if s[l] == s[r]:
-                    dp[r][l] = dp[r + 1][l - 1] + 2    # 如果内层相等，就左右扩大一个
+                    dp[r][l] = dp[r + 1][l - 1] + 2  # 如果内层相等，就左右扩大一个
                 else:
-                    dp[r][l] = max(dp[r+1][l], dp[r][l-1])    # ??? 如果不相等，就左挪一位和右挪一位做比较
+                    dp[r][l] = max(
+                        dp[r + 1][l], dp[r][l - 1]
+                    )  # ??? 如果不相等，就左挪一位和右挪一位做比较
         print(dp)  # 可以看一下返回了什么
         return dp[0][len(s) - 1]
-
 
 
 longp = Solution()

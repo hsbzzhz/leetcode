@@ -24,6 +24,7 @@ class SortDemo(object):
 
             return self.quickSort(less) + [pivot] + self.quickSort(greater)
 
+
 class Solution:
     """
     215. 求 topk 问题
@@ -35,13 +36,13 @@ class Solution:
         pivot = nums[left]  # 初始化一个待比较数据
         while left < right:
             while left < right and nums[right] >= pivot:  # 从后往前查找，直到找到一个比pivot更小的数
-            # while left < right and nums[right] <= pivot:  # 如果改成这样，就是从大到小排序（1）
+                # while left < right and nums[right] <= pivot:  # 如果改成这样，就是从大到小排序（1）
                 right -= 1
             # if nums[right] < pivot:
             nums[left] = nums[right]  # 将更小的数放入左边
 
             while left < right and nums[left] <= pivot:  # 从前往后找，直到找到一个比pivot更大的数
-            # while left < right and nums[left] >= pivot:  # 如果改成这样，就是从大到小排序（2）
+                # while left < right and nums[left] >= pivot:  # 如果改成这样，就是从大到小排序（2）
                 left += 1
             # if nums[left] > pivot
             nums[right] = nums[left]  # 将更大的数放入右边
@@ -68,19 +69,19 @@ class Solution:
             elif index < k:  # k 大一点，那边目标元素就在右侧
                 self.top_split(nums, k, index + 1, right)
             elif index > k:  # k 小一些，那就是在左侧
-                self.top_split(nums, k, left, index -1)
+                self.top_split(nums, k, left, index - 1)
 
     def topk_small(self, nums, k):
-        self.top_split(nums, k, 0, len(nums)-1)
+        self.top_split(nums, k, 0, len(nums) - 1)
         print(nums)
-        return nums[k-1]  # 右边是开区间，需要-1
+        return nums[k - 1]  # 右边是开区间，需要-1
 
     def topk_sort_right(self, nums, k):
         self.top_split(nums, len(nums) - k, 0, len(nums) - 1)
-        topk = nums[len(nums) - k:]
+        topk = nums[len(nums) - k :]
         self.quickSort(topk, 0, len(topk) - 1)
         # print(topk)
-        return nums[:len(nums) - k] + topk  # 只排序后k个数字
+        return nums[: len(nums) - k] + topk  # 只排序后k个数字
 
 
 raw = [3, 2, 3, 1, 2, 4, 5, 5, 6]
@@ -88,6 +89,6 @@ raw = [3, 2, 3, 1, 2, 4, 5, 5, 6]
 
 demo = Solution()
 # res = demo.partition(raw, 0, len(raw)-1)
-res = demo.quickSort(raw, 0, len(raw)-1)
+res = demo.quickSort(raw, 0, len(raw) - 1)
 
 print(res)

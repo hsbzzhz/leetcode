@@ -5,7 +5,7 @@ class KMP(object):
 
     def prefix_table(self):
         n = len(self.pattern)
-        prefix = [0]*n
+        prefix = [0] * n
         i, j = 1, 0
         while i < n:
             if self.pattern[i] == self.pattern[j]:
@@ -33,7 +33,7 @@ class KMP(object):
         i, j = 0, 0
         m, n = len(self.s), len(self.pattern)
         while i < m:
-            if j == n -1 and self.s[i] == self.pattern[j]:
+            if j == n - 1 and self.s[i] == self.pattern[j]:
                 print("found at {}".format(i - j))
                 j = prefix_table[j]
                 if j == prefix_table[0]:
@@ -50,8 +50,6 @@ class KMP(object):
                     j += 1
 
 
-demo = KMP('ababcabaa', 'ababhfababcabaaababcabaa')
+demo = KMP("ababcabaa", "ababhfababcabaaababcabaa")
 print(demo.prefix_table())
 demo.search()
-
-
