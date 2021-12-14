@@ -53,7 +53,7 @@ class Solution:
     def quickSort(self, nums, left, right):
         if left < right:
             index = self.partition(nums, left, right)  # 寻找 mid
-            self.quickSort(nums, left, index - 1)
+            self.quickSort(nums, left, index - 1)  # 跳过 mid 进行排序
             self.quickSort(nums, index + 1, right)
         return nums
 
