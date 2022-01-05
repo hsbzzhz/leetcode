@@ -18,6 +18,7 @@ class Solution(object):
 
     def search(self, nums: List[int], target: int) -> int:
         """
+        细节是魔鬼！！！
         二分查找法   O(logn)
         :type nums: List[int]
         :type target: int
@@ -29,8 +30,13 @@ class Solution(object):
             mid = (l + r) // 2
             if nums[mid] == target:
                 return mid
+<<<<<<< HEAD
+            # 绝无可能 == mid，只和左区间做比较
+            if nums[mid] < nums[l]:  # [mid, r] 之间有序
+=======
             # 只跟 [l] 做比较！
             if nums[mid] < nums[l]:  # 绝无可能 == mid， [mid, r] 之间有序
+>>>>>>> 91cfad3d4a4eb49925eb21a31c22915db399c410
                 if nums[mid] < target <= nums[r]:  # 如果是到在（mid，r] 区间内
                     l = mid + 1
                 else:  # if target < [mid] 或者根本不在区间内
@@ -56,13 +62,13 @@ class Solution(object):
         :rtype: int
         """
         l, r = 0, len(numbers) - 1
-        while l < r:
-            mid = (l + r) // 2
+        while l < r:  # 遍历直至左右指针重合，即所指位置为最小数位置
+            mid = l + (r - l)// 2
             if numbers[mid] > numbers[r]:
                 l = mid + 1
             elif numbers[mid] < numbers[r]:
-                r = mid
-            else:
+                r = mid  # 因为[l ,r)， so
+            else:  # 代表着 middle 可能等于 left 指针的值，或者 right 指针的值，我们这时候只能让 right 指针递减，来一个一个找最小值了
                 r -= 1
         return numbers[l]
 
@@ -70,4 +76,6 @@ class Solution(object):
 test_case = [4, 5, 6, 7, 0, 1, 2]
 obj = Solution()
 res = obj.search(test_case, target=3)
+min_res = obj.minArray(test_case)
 print(res)
+print(min_res)
