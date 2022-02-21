@@ -3,6 +3,22 @@
 
 因为如果达到了链表的容量，那么就需要删除最后一个node，单向链表删除最后一个node时间复杂度是O(N)，所以使用双向链表
 单向链表的话 需要单独记录操作结点的前驱结点，来实现指针的迁移，双向链表就容易很多，不需要额外记录前驱结点
+
+
+
+
+
+1。 为什么要是双向链表，单链表行不行
+因为我们需要删除操作。删除一个节点不光要得到该节点本身的指针，也需要操作其前驱节点的指针，而双向链表才能支持直接查找前驱，保证操作的时间复杂度 O(1)
+2。 既然哈希表中已经存了 key，为什么链表中还要存键值对呢，只存值不就行了
+当缓存容量已满，我们不仅仅要删除最后一个 Node 节点，还要把 map 中映射到该节点的 key 同时删除，而这个 key 只能由 Node 得到。
+如果 Node 结构中只存储 val，那么我们就无法得知 key 是什么，就无法删除 map 中的键，造成错误
+
+
+作者：labuladong
+链接：https://leetcode-cn.com/problems/lru-cache/solution/lru-ce-lue-xiang-jie-he-shi-xian-by-labuladong/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 """
 
 
@@ -70,15 +86,23 @@ class LRUCache:
 
     # 1
     def add_node_to_head(self, node: DlinkedNode):
-        # 只考虑头节点的关系
-        # head.next 表示尾节点
+        """
+        只考虑头节点的关系
+        在head节点后插入node
+
+        :param node:
+        :return:
+        """
+        # 建立 node 的前后关系
         node.prev = self.head
         node.next = self.head.next
+        # 更新 node 前后节点的关系 （head.next的前节点 和 head的后节点）
         self.head.next.prev = node
         self.head.next = node
 
     # 2
     def remove_node(self, node):
+        # 更新node的前后节点
         node.prev.next = node.next
         node.next.prev = node.prev
 
