@@ -29,10 +29,10 @@ class Solution(object):
 
     def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
         """
-		给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
+        给定一个二叉树，返回其节点值的锯齿形层序遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
 
 		例如：
-		给定二叉树 [3,9,20,null,null,15,7],
+		给定二叉树[3,9,20,null,null,15,7],
 
 				3
 			   / \
@@ -60,7 +60,7 @@ class Solution(object):
         is_order = True
         while len(queue) > 0:
             level_queue = []
-            for _ in range(len(queue)):
+            for _ in range(len(queue)):    #  每一层有多少个
                 node = queue.pop(0)
                 if is_order:
                     level_queue.append(node.val)  # 在头部加元素
