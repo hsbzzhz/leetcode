@@ -8,9 +8,10 @@ class TreeNode:
         self.right = right
 
     """
-    三种遍历方法
+    dfs 和 bfs
+    ref. https://blog.csdn.net/mengmengdajuanjuan/article/details/84313361
     """
-
+    # dfs
     def preorder(self, TreeNode):
         # 前序遍历: 根 - 左 - 右
         if TreeNode is None:
@@ -41,22 +42,23 @@ class TreeNode:
     def bfs_order(self, TreeNode):
         """
         时间空间复杂度为 O(n)
-        BFS 广度优先遍历
+        BFS
+
+        尾部入队，头部出队
         :param root:
         :return:
         """
-        queue = [TreeNode]  # 根结点入队
-        res = []
+        queue = [TreeNode]
         while queue:
-            # 推出第一个元素，尾巴加入，推出顶部元素
+            # 推出第一个元素，队首出队
             node: TreeNode = queue.pop(0)
-            res.append(node.val)
-            # 把左右结点入队
+            # 层次遍历，从左至右
+            print(node.val)   # 实际上，只有这里在遍历，下面是在维护队列
+            # 左右节点依次队尾入队，
             if node.left:
                 queue.append(node.left)
             if node.right:
                 queue.append(node.right)
-        return res
 
 
 class FindDepth:
