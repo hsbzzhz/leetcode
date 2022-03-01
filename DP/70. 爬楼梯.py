@@ -42,7 +42,7 @@ class Solution(object):
 
 
 """
-fib 参考
+斐波那契数列 参考
 """
 
 
