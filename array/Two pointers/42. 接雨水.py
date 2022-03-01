@@ -13,33 +13,50 @@ from typing import List
 输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]
 输出：6
 解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 
-https://leetcode-cn.com/problems/trapping-rain-water/
+https://leetcode-cn.com/problems/trapping-rain-water/solution/jie-yu-shui-by-leetcode-solution-tuvc/
 """
 
 
 class Solution:
     def trap0(self, height: List[int]) -> int:
         """
-        todo bug fix
+        双指针 O(n)
         :param height:
         :return:
         """
-        max_index = height.index(max(height))
-        res = 0
-        for left in range(0, max_index):
-            for i in range(left + 1, max_index):
-                if height[i] < height[left]:
-                    res += height[left] - height[i]
-                else:
-                    left = i
+        left, left_max = 0, 0
+        right, right_max = len(height) - 1, 0
+        sum = 0
+        while left < right:
+            left_max = max(left_max, height[left])
+            right_max = max(right_max, height[right])
+            if left_max < right_max:
+                sum = sum + left_max - height[left]
+                left += 1
+            else:
+                sum = sum + right_max - height[right]
+                right -= 1
+        return sum
 
-        for right in range(len(height) - 1, max_index, -1):
-            for j in range(right - 1, max_index, -1):
-                if height[j] < height[right]:
-                    res += height[right] - height[j]
-                else:
-                    right = j
-        return res
+    def trap2(self, height: List[int]) -> int:
+        """
+        动归
+        :param height:
+        :return:
+        """
+        if not height:
+            return 0
+        n = len(height)
+        leftMax = [height[0]] + [0] * (n - 1)
+        for i in range(1, n):
+            leftMax[i] = max(leftMax[i - 1], height[i])
+
+        rightMax = [0] * (n - 1) + [height[n - 1]]
+        for i in range(n - 2, -1, -1):   # 从index为n-2开始，到index为0，每一步index-1
+            rightMax[i] = max(rightMax[i + 1], height[i])
+
+        ans = sum(min(leftMax[i], rightMax[i]) - height[i] for i in range(n))
+        return ans
 
     def trap1(self, height: List[int]) -> int:
         """
@@ -62,25 +79,6 @@ class Solution:
             ans += min(max_right, max_left) - height[i]
         return ans
 
-    def trap2(self, height: List[int]) -> int:
-        """
-        双指针 O(n)
-        :param height:
-        :return:
-        """
-        left, left_max = 0, 0
-        right, right_max = len(height) - 1, 0
-        sum = 0
-        while left < right:
-            left_max = max(left_max, height[left])
-            right_max = max(right_max, height[right])
-            if left_max < right_max:
-                sum = sum + left_max - height[left]
-                left += 1
-            else:
-                sum = sum + right_max - height[right]
-                right -= 1
-        return sum
 
 
 height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
