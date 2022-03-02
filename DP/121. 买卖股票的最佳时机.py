@@ -23,7 +23,7 @@ class Stock(object):
         """
         121. 买卖股票的最佳时机
         单次买卖，获得的最大利润
-
+        - 不用dp
         :type prices: List[int]
         :rtype: int
         """
@@ -35,11 +35,27 @@ class Stock(object):
             profit = max(profit, prices[index] - minPrice)
         return profit
 
+    def maxProfit_1(self, prices):
+        """
+        121. 买卖股票的最佳时机
+        单次买卖，获得的最大利润
+        - dp 方法
+        :type prices: List[int]
+        :rtype: int
+        """
+
+        dp = [[0 for _ in range(2)] for _ in range(len(prices))]
+        dp[0][1] = -prices[0]
+        for i in range(1, len(prices)):
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+            dp[i][1] = max(dp[i - 1][1], - prices[i])     # 不允许多次买卖，要买就是 - prices[i]
+        return dp[len(prices) - 1][0]   # 最后盈利一定是股票出手的情况
+
     def maxProfit2(self, prices: List[int]) -> int:
         """
         O(n) O(1)
         122. 买卖股票的最佳时机 II
-        允许多次买卖
+        允许多次买卖：未用dp
         :param self:
         :param prices:
         :return:
@@ -50,9 +66,11 @@ class Stock(object):
 
         return max_profit
 
-    def maxProfit3(self, prices: List[int]) -> int:
+    def maxProfit2_1(self, prices: List[int]) -> int:
         """
         O(n) O(n)
+        122. 买卖股票的最佳时机 II
+        允许多次买卖：dp方法
         :param self:
         :param prices:
         :return:
@@ -64,84 +82,67 @@ class Stock(object):
             dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])
         return dp[len(prices) - 1][0]
 
+
+    def maxProfit3(self, prices: List[int], fee) -> int:
+        """
+        O(n) O(n)
+
+        允许多次买卖：+交易费（买的时候要交交易费）
+        dp方法
+        :param self:
+        :param prices:
+        :return:
+        """
+        dp = [[0 for _ in range(2)] for _ in range(len(prices))]
+        dp[0][1] = -prices[0]
+        for i in range(1, len(prices)):
+            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
+            dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i] - fee)
+        return dp[len(prices) - 1][0]
+
     """
+    考虑交易几手的情况
     
     dp[i][k][0]  第i天，最多进行了k次交易，手里没有持股
     dp[i][k][1]  第i天，最多进行了k次交易，手里持股
-    
+
     dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
                   max(   选择 rest ,       选择 sell         )
 
     dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
                   max(   选择 rest ,       选择 buy     )
-    
+
     ref.
-    https://labuladong.gitbook.io/algo/bi-du-wen-zhang/tuan-mie-gu-piao-wen-ti
-    
+    https://labuladong.gitee.io/algo/3/26/99/
+
     """
 
-    def maxProfit_k_inf(self, prices):
-        n = len(prices)
-        dp_i_0, dp_i_1 = 0, float("-inf")
-        for i in range(n):
-            temp = dp_i_0
-            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
-            dp_i_1 = max(dp_i_1, temp - prices[i])
-        return dp_i_0
-
-    def maxProfit5(self, k, prices):
+    def maxProfit6(self, k, prices):
         """
-        :type k: int
+        只允许 买n次的情况：
+        如果k > n //2 ， 等等同于k为无穷大
+
+        :type k: int 允许买卖的次数
         :type prices: List[int]
         :rtype: int
         """
         n = len(prices)
         if k > n // 2:
-            # return self.maxProfit_k_inf(prices)
-            k = n // 2
-        dp = [[[0] * 2 for _ in range(k + 1)] for _ in range(n)]
-        # base case
-        for i in range(1, k + 1):
-            dp[0][i][0] = 0
-            dp[0][i][1] = -prices[0]
-        for i in range(1, n):
-            for j in range(1, k + 1):
-                dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i])
-                dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i])
-
-        return dp[n - 1][k][0]
-
-    def maxProfit6(self, k, prices):
-        """
-        :type k: int
-        :type prices: List[int]
-        :rtype: int
-        """
-        n = len(prices)
-        if k > n / 2:
             return self.maxProfit_k_inf(prices)
+        #
+        dp = [[[0] * 2 for _ in range(k + 1)] for _ in range(n)]    # 三维数组
+        # i = 0 时的 base case
+        for k in range(k+1):
+            dp[0][k][0] = 0  # 这步可以省略，不买肯定是0
+            dp[0][k][-1] = -prices[0]
+        # index 为0都初始化了，所以循环从1开始
+        for i in range(1, n):
+            for k in range(1, k+1):
+                dp[i][k][0] = max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i])
+                dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i])
 
-        dp = [[[0] * 2 for _ in range(k + 1)] for _ in range(n)]
-
-        # for i in range(k+1):
-        #     dp[0][i][0] = 0
-        #     dp[0][i][-1] = float('-inf')
-        for i in range(n):
-            # j = k
-            for j in range(1, k + 1):
-                # k +1是因为k从1开始，循环要到k
-                if i == 0:  # base case
-                    dp[i][j][0] = 0
-                    dp[i][j][1] = float("-inf")
-                    continue
-                dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i])
-                dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i])
-                # j -= 1
-        print(dp)
         return dp[n - 1][k][0]
-
 
 demo = Stock()
-res = demo.maxProfit5(2, [1, 2, 4, 2, 5, 7, 2, 4, 9, 0])  # 13
-# res = demo.maxProfit6(1, [1,2])
+res = demo.maxProfit6(2, [1, 2, 4, 2, 5, 7, 2, 4, 9, 0])  # 13
 print(res)
