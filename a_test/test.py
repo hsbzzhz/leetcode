@@ -23,3 +23,7 @@ def solution(A):
     for i in range(1, len(A) - 1):
         max_value = max(max_value, fore_max[i - 1] + post_max[i + 1])
     return max_value
+
+
+for i in range(10, 1, -1):
+    print(i)

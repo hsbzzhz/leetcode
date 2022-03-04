@@ -3,7 +3,6 @@
 
 子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除任何字符形成的一个序列。
 
- 
 
 示例 1：
 
@@ -25,6 +24,11 @@
 
 class Solution:
     def longestPalindromeSubseq(self, s: str) -> int:
+        """
+
+        :param s:
+        :return:
+        """
         dp = [[0] * len(s) for _ in range(len(s))]
         for i in range(len(s)):
             dp[i][i] = 1

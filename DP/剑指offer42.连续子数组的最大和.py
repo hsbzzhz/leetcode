@@ -16,21 +16,43 @@ class Solution:
     来源：力扣（LeetCode）
     链接：https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof
     著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+    同：53. 最大子序和
     """
 
     def maxSubArray(self, nums: List[int]) -> int:
+        """
+        DP O(n) O(n)
+        :param nums:
+        :return:
+        """
         dp = [nums[0]] * len(nums)
-        index = []
         for i in range(1, len(nums)):
             dp[i] = max(dp[i - 1] + nums[i], nums[i])
-            if dp[i-1] + nums[i] > nums[i]:
-                index.append(index[-1] + nums[i])
-            else:
-                index.append([nums[i]])
-        print(index)
         return max(dp)
+
+
+    def maxSubArray_0(self, nums: List[int]) -> int:
+        """
+        DP O(n) O(1)
+        当前最大连续子序列和为 pre， 总计最大结果 max_res
+
+        :param nums:
+        :return:
+        """
+        max_res = nums[0]
+        pre = 0
+        for each in nums:
+            pre = max(pre + each, each)
+            max_res = max(max_res, pre)
+        return max_res
 
 
 nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 demo = Solution().maxSubArray(nums)
 print(demo)
+
+"""
+附加题：
+如果需要输出，这个结果的数组
+"""

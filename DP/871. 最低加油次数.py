@@ -1,9 +1,9 @@
 """
-汽车从起点出发驶向目的地，该目的地位于出发位置东面 target 英里处。
+汽车从起点出发驶向目的地，该目的地位于出发位置东面 target英里处。
 
-沿途有加油站，每个 station[i] 代表一个加油站，它位于出发位置东面 station[i][0] 英里处，并且有 station[i][1] 升汽油。
+沿途有加油站，每个station[i]代表一个加油站，它位于出发位置东面station[i][0]英里处，并且有station[i][1]升汽油。
 
-假设汽车油箱的容量是无限的，其中最初有 startFuel 升燃料。它每行驶 1 英里就会用掉 1 升汽油。
+假设汽车油箱的容量是无限的，其中最初有startFuel升燃料。它每行驶 1 英里就会用掉 1 升汽油。
 
 当汽车到达加油站时，它可能停下来加油，将所有汽油从加油站转移到汽车中。
 
@@ -41,7 +41,7 @@
 """
 from typing import List
 
-
+# TODO 理解
 class Solution:
     def minRefuelStops(
         self, target: int, startFuel: int, stations: List[List[int]]
@@ -57,19 +57,19 @@ class Solution:
         for i in range(n + 1):
             dp[i][0] = startFuel
         """
-        第站i， 有station[i][1] 升汽油
-        第站i， 有station[i][0] 英里远
+        第站i， 有station[i][1]升汽油
+        第站i， 有station[i][0]英里远
         """
         for i in range(1, n + 1):  # 0 为初始
             for j in range(1, i):
-                if dp[i - 1][j] >= stations[i - 1][0]:  # todo 不懂
+                if dp[i - 1][j] >= stations[i - 1][0]:  # 不懂
                     # 本站不加油，的前提是不加油的情况可以到油站
                     dp[i][j] = dp[i - 1][j]
                 if dp[i - 1][j - 1] >= stations[i - 1][0]:
                     # 前 i-1 站加 j-1 次，本站加油
                     dp[i][j] = max(
                         dp[i][j], dp[i - 1][j - 1] + stations[i - 1][1]
-                    )  # todo 不懂
+                    )  # 不懂
                 # or
                 dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - 1] + stations[i - 1][1])
         for i in range(n + 1):
