@@ -8,7 +8,7 @@ class Solution:
             for i in range(start, len(nums)):
                 track.append(nums[i])
                 backtrack(track, i + 1)
-                track.pop()
+                track.pop(-1)
 
         res = []
         backtrack([], 0)

@@ -3,9 +3,8 @@ from typing import List
 
 class Solution:
     """
-    并不是回溯
     dfs
-    数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合
+    数字 n代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的 括号组合
 
     示例 1：
 
@@ -21,16 +20,24 @@ class Solution:
         ans = []
 
         def backtrack(track, left, right):
-            if left == n and right == n:  # 所有括号都上齐的情况
+            """
+
+            :param track: 当前路径
+            :param left: 左括号已匹配的个数
+            :param right: 右括号已匹配的个数
+            :return:
+            """
+            if left == n and right == n:  # 在左右括号个数都==n的情况上，代表当前路径是一个答案
                 ans.append("".join(track))
                 return
             # 先放左边的括号，再补右边的括号
-            if left < n:  # 左括号没有，就append
+            # 这里不用while
+            if left < n:  # 补充左边括号
                 track.append("(")
                 # left += 1  这样写就错了
-                backtrack(track, left + 1, right)
+                backtrack(track, left + 1, right)  # 下一个计算
                 track.pop()
-            if right < left:  # 左括号有了，append右括号
+            if right < left:  # 补充右边括号
                 track.append(")")
                 # right += 1  这样写就错了
                 backtrack(track, left, right + 1)
