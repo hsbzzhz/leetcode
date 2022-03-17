@@ -32,14 +32,12 @@ class Solution:
                 return
             # 先放左边的括号，再补右边的括号
             # 这里不用while
-            if left < n:  # 补充左边括号
+            if left < n:  # 先补充左边括号
                 track.append("(")
-                # left += 1  这样写就错了
                 backtrack(track, left + 1, right)  # 下一个计算
                 track.pop()
             if right < left:  # 补充右边括号
                 track.append(")")
-                # right += 1  这样写就错了
                 backtrack(track, left, right + 1)
                 track.pop()
 

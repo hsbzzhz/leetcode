@@ -26,7 +26,7 @@ class Solution:
             """
             if not 0 <= i < len(board) or not 0 <= j < len(board[0]) or board[i][j] != word[k]: return False
             if k == len(word) - 1: return True
-            board[i][j] = ''  # 标记当前矩阵元素，防止重复访问，直接跳过第一个元素
+            board[i][j] = ''  # 如果是访问过的，直接至''
             # 递归顺序是 下-上-右-左
             res = dfs(i + 1, j, k + 1) or dfs(i - 1, j, k + 1) or dfs(i, j + 1, k + 1) or dfs(i, j - 1, k + 1)
             board[i][j] = word[k]  # 还原数组

@@ -45,7 +45,7 @@ class Solution:
                 return  # 必须加这一步，否则指针溢出
             for word in phone[digits[index]]:  # ["a", "b", "c"]
                 track += word  # "ad"
-                dfs(track, index + 1)  # ["d", "e", "f"]
+                dfs(track, index + 1)  # ["d", "e", "f"] 如果有，会跳到下一个集
                 track = track[:-1]  # 移除尾部字符，还原
 
         res = []

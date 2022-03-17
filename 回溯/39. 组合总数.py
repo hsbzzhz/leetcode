@@ -56,9 +56,8 @@ class Solution:
                 return
             # 如果是 range(len(candidates)), 就会出现重复解
             for i in range(start, len(candidates)):
-                if candidates[i] <= target:
+                if candidates[i] <= target:  # 确保target - candidate不为负数
                     path.append(candidates[i])
-                    #
                     backtrace(candidates, path, i, target - candidates[i])
                     path.pop(-1)
 
