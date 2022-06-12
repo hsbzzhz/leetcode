@@ -1,12 +1,11 @@
 class SortDemo1(object):
     def SortDemo(self, arr):
         """
-        O(nlogn)
-        先分后治
-        最坏情况也能保证 O(nlogn)
-        mergeSort是分, 把列表分开
-        :param arr:
-        :return:
+        +先分后治+ O(nlogn)
+
+        归并排序，简单来说就是先将数组不断细分成最小的单位，然后每个单位分别排序，排序完毕后合并，重复以上过程最后就可以得到排序结果。
+        稳定 O(nlogn)
+
         """
         if len(arr) < 2:
             return arr

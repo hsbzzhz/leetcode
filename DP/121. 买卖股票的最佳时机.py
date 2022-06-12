@@ -19,7 +19,7 @@ from typing import List
 
 
 class Stock(object):
-    def maxProfit(self, prices):
+    def maxProfit_greedy(self, prices):
         """
         121. 买卖股票的最佳时机
         单次买卖，获得的最大利润
@@ -35,7 +35,7 @@ class Stock(object):
             profit = max(profit, prices[index] - minPrice)
         return profit
 
-    def maxProfit_1(self, prices):
+    def maxProfit1_dp(self, prices):
         """
         121. 买卖股票的最佳时机
         单次买卖，获得的最大利润
