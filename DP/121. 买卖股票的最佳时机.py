@@ -87,7 +87,7 @@ class Stock(object):
         """
         O(n) O(n)
 
-        允许多次买卖：+交易费（买的时候要交交易费）
+        允许多次买卖：+交易费（买的时候要算 fee）
         dp方法
         :param self:
         :param prices:

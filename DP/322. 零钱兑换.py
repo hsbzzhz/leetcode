@@ -72,7 +72,7 @@ class Solution(object):
         k是面值的数目，n是总额
         O(kn)
 
-        dp[i] 表示凑到数额i需要的最少硬币数
+        ** dp[i] 表示凑到数额i需要的最少硬币数 **
         :param coins:
         :param amount:
         :return:
