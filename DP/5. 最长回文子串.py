@@ -48,7 +48,7 @@ class Solution(object):
 
     def __center_spread(self, s, left, right):
         """
-        每个字符向四周扩散搜索，
+        每个字符向左右扩散搜索，
         :param s:
         :param left:
         :param right:
